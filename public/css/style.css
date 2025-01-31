@@ -28,9 +28,6 @@ body {
     transform-style: preserve-3d;
     transition: transform 0.8s;
 }
-.card.is-flipped {
-    transform: rotateY(180deg);
-}
 .card__face {
     position: absolute;
     width: 100%;
@@ -49,7 +46,6 @@ body {
 }
 .card__face--back {
     height: 600px;
-    transform: rotateY(180deg);
     margin-top: -330px;
 }
 .form-group {
@@ -126,6 +122,9 @@ body {
 .middle-column {
     width: 50%;
     margin-right: 1%;
+}
+.right-column {
+    width: 50%;
 }
 .postit-form {
     margin-bottom: 20px;

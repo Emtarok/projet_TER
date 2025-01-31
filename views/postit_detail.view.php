@@ -41,55 +41,7 @@
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="middle-column">
-            <div class="postit-form card">
-                <div class="card-body">
-                    <h2>Créer un post</h2>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Title">
-                        </div>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Content"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Publier</button>
-                    </form>
-                </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title">Titre</h5>
-                        <p class="card-text">Le contenu de mon post.</p>
-                        <small class="text-muted">Publié le: 2023-10-01</small>
-                    </div>
-                    <div class="options-container">
-                        <button class="btn btn-light btn-sm"><i class="fas fa-ellipsis-h"></i></button>
-                        <div class="options-menu">
-                            <button>Modifier</button>
-                            <button>Supprimer</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <div class="reaction-container">
-                        <button class="btn btn-light btn-sm"><i class="fas fa-thumbs-up"></i> J'aime</button>
-                        <div class="reaction-buttons">
-                            <button class="btn btn-light btn-sm" style="color: #007BFF;"><i class="fas fa-thumbs-up"></i></button>
-                            <button class="btn btn-light btn-sm" style="color: #FFD700;"><i class="fas fa-laugh"></i></button>
-                            <button class="btn btn-light btn-sm" style="color: #FF4500;"><i class="fas fa-angry"></i></button>
-                            <button class="btn btn-light btn-sm" style="color: #1E90FF;"><i class="fas fa-sad-tear"></i></button>
-                            <button class="btn btn-light btn-sm" style="color: #FF1493;"><i class="fas fa-heart"></i></button>
-                        </div>
-                    </div>
-                    <button class="btn btn-light btn-sm" onclick="toggleCommentSection(this)"><i class="fas fa-comment"></i> Commenter</button>
-                    <button class="btn btn-light btn-sm"><i class="fas fa-share"></i> Partager</button>
-                </div>
-                <div class="comment-section">
-                    <textarea class="form-control" rows="2" placeholder="Ecrire un commentaire..."></textarea>
-                    <button class="btn btn-primary btn-sm mt-2">Commenter</button>
-                </div>
-            </div>
+        <div class="middle-column"> 
             <div class="postit-card card">
                 <div class="card-body">
                     <div>
