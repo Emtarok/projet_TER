@@ -26,16 +26,16 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/postit.html">Accueil</a>
+                    <a class="nav-link" href="#">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Profil</a>
+                    <a class="nav-link" href="#">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./index.html">Deconnexion</a>
+                    <a class="nav-link" href="#">Deconnexion</a>
                 </li>
             </ul>
         </div>

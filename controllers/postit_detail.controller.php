@@ -10,9 +10,9 @@ function handle_request() {
             require_once __DIR__ . '/../views/postit_details.view.php';
             break;
     
-        // case 'inscription':
-        //     require_once __DIR__ . '/../views/postit_list.view.php';
-        //     break;
+        case 'list':
+            require_once __DIR__ . '/../views/postit_list.view.php';
+            break;
 
         default:
             echo "Page non trouvée.";
