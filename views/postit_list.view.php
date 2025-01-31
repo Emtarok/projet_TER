@@ -26,7 +26,7 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Accueil</a>
+                    <a class="nav-link" href="?action=list">Accueil</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profil</a>
@@ -42,6 +42,10 @@
     </nav>
     <div class="container-fluid">
         <div class="middle-column">
+            <div class="create_postit">
+                <h5 class="card-title">La liste de vos Post-it</h5>
+                <button class="btn btn-primary" onclick="window.location.href='?action=create'">Nouveau</button>
+            </div>
             <div class="postit-card card">
                 <div class="card-body">
                     <div>
@@ -62,6 +66,9 @@
             </div>
         </div>
         <div class="right-column">
+            <div class="create_postit">
+                <h5 class="card-title">Post partagé pour vous</h5>
+            </div>
             <div class="postit-card card">
                 <div class="card-body">
                     <a href="#" class="card-title">Post partagé pour vous</a>

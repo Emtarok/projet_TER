@@ -123,6 +123,20 @@ body {
     width: 50%;
     margin-right: 1%;
 }
+.create_postit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.create_postit{
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 .right-column {
     width: 50%;
 }
