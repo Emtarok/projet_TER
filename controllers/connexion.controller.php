@@ -20,7 +20,6 @@ function handle_request() {
             break;
         
         case 'liste':
-            echo "Action details atteinte";
             require_once __DIR__ . '/../views/postit_list.view.php';
             break;
 

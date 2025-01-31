@@ -3,23 +3,23 @@ $action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
 switch ($action) {
     case 'connexion':
-        require_once __DIR__ . '/../controllers/connexion.controller.php';
+        require_once __DIR__ . '/controllers/connexion.controller.php';
         break;
 
     case 'inscription':
-        require_once __DIR__ . '/../controllers/inscription.controller.php';
+        require_once __DIR__ . '/controllers/inscription.controller.php';
         break;
 
     case 'details':
-        require_once __DIR__ . '/../controllers/details.controller.php';
+        require_once __DIR__ . '/controllers/postit_detail.controller.php';
         break;
     
     case 'list':
-        require_once __DIR__ . '/../controllers/postit_list.controller.php';
+        require_once __DIR__ . '/controllers/postit_list.controller.php';
         break;
 
     default:
-        require_once __DIR__ . '/../controllers/controller.php';
+        require_once __DIR__ . '/controllers/controller.php';
         break;
 }
 
