@@ -40,6 +40,9 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 }
+.card__face form {
+    width: 100%;
+}
 .card__face--front {
     height: 300px;
     margin-top: -160px;
@@ -122,6 +125,11 @@ body {
 .middle-column {
     width: 50%;
     margin-right: 1%;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .create_postit {
     display: flex;
