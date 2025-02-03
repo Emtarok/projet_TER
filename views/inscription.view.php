@@ -15,28 +15,44 @@
         </div>
         <div class="container">
             <div class="card w-100" id="card">
-                <div class="card__face card__face--front">
-                    <h2>Connexion</h2>
+                <div class="card__face card__face--back">
+                    <h2>Inscription</h2>
                     <form action="connexion.controller.php" method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="nom" placeholder="Nom">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="prenom" placeholder="Prénom">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="pseudo" placeholder="Pseudo">
+                        </div>
                         <div class="form-group">
                             <input type="email" class="form-control" name="email" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" id="signin-password" name="password" placeholder="Mot de passe">
-                            <i class="fas fa-eye password-toggle" onclick="togglePassword('signin-password', this)"></i>
+                            <input type="date" class="form-control" name="date_naissance" placeholder="Date de naissance">
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+                            <input type="password" class="form-control" id="signup-password" name="password" placeholder="Mot de passe">
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('signup-password', this)"></i>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="signup-confirm-password" name="confirm_password" placeholder="Confirmation de mot de passe">
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('signup-confirm-password', this)"></i>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Inscription</button>
                         </div>
                     </form>
-                    <button class="toggle-button" onclick="redirectToSignUp()">Pas encore de compte? Inscription</button>
+                    <button class="toggle-button" onclick="redirectToSignUp()">Déja un compte? Connexion</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
         function redirectToSignUp() {
-            window.location.href = '?action=connexion';
+            window.location.href = '?action=inscription';
         }
         function togglePassword(fieldId, icon) {
             const field = document.getElementById(fieldId);
