@@ -41,6 +41,7 @@
         </div>
     </nav>
     <div class="container-fluid">
+<<<<<<< HEAD
         <div class="middle-column">
             <div class="postit-form card">
                 <div class="card-body">
@@ -90,6 +91,9 @@
                     <button class="btn btn-primary btn-sm mt-2">Commenter</button>
                 </div>
             </div>
+=======
+        <div class="middle-column"> 
+>>>>>>> Hasimbola
             <div class="postit-card card">
                 <div class="card-body">
                     <div>

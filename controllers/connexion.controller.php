@@ -20,7 +20,10 @@ function handle_request() {
             break;
         
         case 'liste':
+<<<<<<< HEAD
             echo "Action details atteinte";
+=======
+>>>>>>> Hasimbola
             require_once __DIR__ . '/../views/postit_list.view.php';
             break;
 
@@ -28,4 +31,8 @@ function handle_request() {
             echo "Page non trouvée.";
     }
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> Hasimbola

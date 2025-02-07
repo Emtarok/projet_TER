@@ -26,7 +26,11 @@
                     </form>
                 </li>
                 <li class="nav-item">
+<<<<<<< HEAD
                     <a class="nav-link" href="#">Accueil</a>
+=======
+                    <a class="nav-link" href="?action=list">Accueil</a>
+>>>>>>> Hasimbola
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profil</a>
@@ -40,6 +44,20 @@
             </ul>
         </div>
     </nav>
+<<<<<<< HEAD
+=======
+    <div class="contrainer-fluid">
+        <div class="top">
+            <div class="create_postit">
+                <h5 class="card-title">La liste de vos Post-it</h5>
+                <button class="btn btn-primary" onclick="window.location.href='?action=create'">Nouveau</button>
+            </div>
+            <div class="create_postit">
+                <h5 class="card-title">Post partagé pour vous</h5>
+            </div>
+        </div>
+    </div>
+>>>>>>> Hasimbola
     <div class="container-fluid">
         <div class="middle-column">
             <div class="postit-card card">
@@ -60,6 +78,63 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>  
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>  
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>  
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+>>>>>>> Hasimbola
         </div>
         <div class="right-column">
             <div class="postit-card card">
@@ -79,4 +154,8 @@
         }
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> Hasimbola

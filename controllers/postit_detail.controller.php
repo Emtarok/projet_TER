@@ -18,4 +18,8 @@ function handle_request() {
             echo "Page non trouvée.";
     }
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> Hasimbola

@@ -63,6 +63,7 @@
         </div>
     </div>
     <script>
+<<<<<<< HEAD
         function toggleCard() {
             $('#card').toggleClass('is-flipped');
         }
@@ -71,6 +72,11 @@
             window.location.href = '?action=list';
         }
 
+=======
+        function redirectToSignUp() {
+            window.location.href = '?action=connexion';
+        }
+>>>>>>> Hasimbola
         function togglePassword(fieldId, icon) {
             const field = document.getElementById(fieldId);
             if (field.type === "password") {
@@ -85,4 +91,8 @@
         }
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> Hasimbola
