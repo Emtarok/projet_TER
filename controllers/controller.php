@@ -7,7 +7,6 @@ function handle_request() {
 
     switch ($action) {
         case 'home':
-            $data = get_data(); // Appel au modèle
             require_once __DIR__ . '/../views/connexion.view.php'; // Charger la vue
             break;
 

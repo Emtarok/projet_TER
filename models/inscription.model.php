@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-function get_data() {
+function set_data() {
     $conn = db_connect();
     $sql = "SELECT * FROM faits";
     $result = mysqli_query($conn, $sql);

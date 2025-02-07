@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/style.css">
@@ -15,6 +16,9 @@
         </div>
         <div class="container">
             <div class="card w-100" id="card">
+                <div id=message>
+                    Tous les champs sont obligatoireq
+                </div>
                 <div class="card__face card__face--back">
                     <h2>Inscription</h2>
                     <form action="connexion.controller.php" method="POST">
@@ -50,6 +54,7 @@
             </div>
         </div>
     </div>
+    <script src="../public/js/verification.js"></script>
     <script>
         function redirectToSignUp() {
             window.location.href = '?action=inscription';
