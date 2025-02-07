@@ -14,28 +14,27 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar facilisis justo mollis, auctor consequat urna.</p>
         </div>
         <div class="container">
-            <div class="card" id="card">
+            <div class="card w-100" id="card">
                 <div class="card__face card__face--front">
                     <h2>Connexion</h2>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="signin-password" placeholder="Mot de passe">
-                        <i class="fas fa-eye password-toggle" onclick="togglePassword('signin-password', this)"></i>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-primary btn-block" onclick="redirectToPostIt()">Connexion</button>
-                    </div>
+                    <form action="?action=connexion" method="POST">
+                        <div class="form-group">
+                            <input type="email" class="form-control" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="signin-password" name="password" placeholder="Mot de passe">
+                            <i class="fas fa-eye password-toggle" onclick="togglePassword('signin-password', this)"></i>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+                        </div>
+                    </form>
                     <button class="toggle-button" onclick="redirectToSignUp()">Pas encore de compte? Inscription</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        function redirectToPostIt() {
-            window.location.href = '?action=list';
-        }
         function redirectToSignUp() {
             window.location.href = '?action=inscription';
         }

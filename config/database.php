@@ -1,7 +1,7 @@
 <?php
 function db_connect() {
     $host = "localhost";
-    $dbname = "test";
+    $dbname = "postit";
     $username = "root";
     $password = "";
 

@@ -17,6 +17,10 @@ switch ($action) {
     case 'list':
         require_once __DIR__ . '/controllers/postit_list.controller.php';
         break;
+    
+    case 'create':
+        require_once __DIR__ . 'controllers/creation.controller.php';
+        break;
 
     default:
         require_once __DIR__ . '/controllers/controller.php';
