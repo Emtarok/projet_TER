@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/postit.model.php';
+require_once __DIR__ . '/../models/postit_list.model.php';
 
 function handle_request() {
     $action = isset($_GET['action']) ? $_GET['action'] : 'home';
@@ -10,6 +10,7 @@ function handle_request() {
             break;
         
         case 'details':
+            echo "Action details atteinte";
             require_once __DIR__ . '/../views/postit_details.view.php';
             break;
         

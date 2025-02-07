@@ -11,14 +11,19 @@ function handle_request() {
             break;
     
         case 'inscription':
-            require_once __DIR__ . '/../views/inscription.view.php';
+            require_once __DIR__ . '/../views/postit_list.view.php';
             break;
-
+        
         case 'details':
+            echo "Action details atteinte";
             require_once __DIR__ . '/../views/postit_detail.view.php';
             break;
         
         case 'liste':
+<<<<<<< HEAD
+            echo "Action details atteinte";
+=======
+>>>>>>> Hasimbola
             require_once __DIR__ . '/../views/postit_list.view.php';
             break;
 
@@ -26,4 +31,8 @@ function handle_request() {
             echo "Page non trouvée.";
     }
 }
+<<<<<<< HEAD
 ?>
+=======
+?>
+>>>>>>> Hasimbola

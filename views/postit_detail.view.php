@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -41,7 +41,59 @@
         </div>
     </nav>
     <div class="container-fluid">
+<<<<<<< HEAD
+        <div class="middle-column">
+            <div class="postit-form card">
+                <div class="card-body">
+                    <h2>Créer un post</h2>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Title">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="Content"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Publier</button>
+                    </form>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title">Titre</h5>
+                        <p class="card-text">Le contenu de mon post.</p>
+                        <small class="text-muted">Publié le: 2023-10-01</small>
+                    </div>
+                    <div class="options-container">
+                        <button class="btn btn-light btn-sm"><i class="fas fa-ellipsis-h"></i></button>
+                        <div class="options-menu">
+                            <button>Modifier</button>
+                            <button>Supprimer</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="reaction-container">
+                        <button class="btn btn-light btn-sm"><i class="fas fa-thumbs-up"></i> J'aime</button>
+                        <div class="reaction-buttons">
+                            <button class="btn btn-light btn-sm" style="color: #007BFF;"><i class="fas fa-thumbs-up"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #FFD700;"><i class="fas fa-laugh"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #FF4500;"><i class="fas fa-angry"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #1E90FF;"><i class="fas fa-sad-tear"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #FF1493;"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <button class="btn btn-light btn-sm" onclick="toggleCommentSection(this)"><i class="fas fa-comment"></i> Commenter</button>
+                    <button class="btn btn-light btn-sm"><i class="fas fa-share"></i> Partager</button>
+                </div>
+                <div class="comment-section">
+                    <textarea class="form-control" rows="2" placeholder="Ecrire un commentaire..."></textarea>
+                    <button class="btn btn-primary btn-sm mt-2">Commenter</button>
+                </div>
+            </div>
+=======
         <div class="middle-column"> 
+>>>>>>> Hasimbola
             <div class="postit-card card">
                 <div class="card-body">
                     <div>

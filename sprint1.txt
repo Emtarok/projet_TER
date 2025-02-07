@@ -1,0 +1,8 @@
+Sprint 1
+Au moins une story map (Avoir une idée des utilisateurs du système)
+    - Liasison avec les utilisateurs et les fonctionnalités
+    - Pas de liaisons orphelins
+
+Sprint 2
+Avoir au moins 2/3 US dans un backlog
+    - Au format idUS;

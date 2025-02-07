@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="./public/css/style.css">
+    <link rel="stylesheet" href="../public/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
@@ -26,7 +26,11 @@
                     </form>
                 </li>
                 <li class="nav-item">
+<<<<<<< HEAD
+                    <a class="nav-link" href="#">Accueil</a>
+=======
                     <a class="nav-link" href="?action=list">Accueil</a>
+>>>>>>> Hasimbola
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Profil</a>
@@ -40,6 +44,8 @@
             </ul>
         </div>
     </nav>
+<<<<<<< HEAD
+=======
     <div class="contrainer-fluid">
         <div class="top">
             <div class="create_postit">
@@ -51,6 +57,7 @@
             </div>
         </div>
     </div>
+>>>>>>> Hasimbola
     <div class="container-fluid">
         <div class="middle-column">
             <div class="postit-card card">
@@ -71,6 +78,8 @@
                     </div>
                 </div>
             </div>
+<<<<<<< HEAD
+=======
             <div class="postit-card card">
                 <div class="card-body">
                     <div>
@@ -125,6 +134,7 @@
                     </div>
                 </div>
             </div>
+>>>>>>> Hasimbola
         </div>
         <div class="right-column">
             <div class="postit-card card">
@@ -144,4 +154,8 @@
         }
     </script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+</html>
+>>>>>>> Hasimbola
