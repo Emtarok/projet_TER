@@ -16,4 +16,5 @@ function get_data() {
     mysqli_close($conn);
     return $data;
 }
+// a modifier
 ?>
