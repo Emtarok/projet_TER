@@ -1,0 +1,264 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+.login{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+}
+.description {
+    flex: 2;
+    max-width: 55%;
+}
+.container {
+    flex: 1;
+    perspective: 1000px;
+    max-width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+.card {
+    width: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+}
+.card__face {
+    position: absolute;
+    width: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+.card__face form {
+    width: 100%;
+}
+.card__face--front {
+    height: 300px;
+    margin-top: -160px;
+}
+.card__face--back {
+    height: 600px;
+    margin-top: -330px;
+}
+.form-group {
+    margin-bottom: 15px;
+    width: 100%;
+    position: relative;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.toggle-button {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    color: #007BFF;
+    cursor: pointer;
+}
+.card__face--back .form-group input {
+    border: 1px solid #007BFF;
+}
+.card__face--back .form-group button {
+    background-color: #28a745;
+}
+.card__face--back .toggle-button {
+    color: #28a745;
+}
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.container-fluid {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    border-radius: 24px;
+    padding: 5px 10px;
+    background-color: white;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+.search-container input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    border-radius: 24px;
+    flex-grow: 1;
+}
+.search-container button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #5f6368;
+}
+.search-container button:hover {
+    color: #007bff;
+}
+.middle-column {
+    width: 50%;
+    margin-right: 1%;
+}
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+.title button{
+    height: fit-content;
+    border-radius: 50%;
+    font-size: x-large; 
+    background-color: #5f6368;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card-title-h5{
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+.create_postit {
+    /* display: flex; */
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.create_postit{
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.right-column {
+    width: 50%;
+}
+.postit-form {
+    margin-bottom: 20px;
+}
+.postit-card {
+    padding: 10px;
+    margin-bottom: 15px;
+    position: relative;
+}
+.postit-card .card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.postit-card .card-body .actions {
+    display: flex;
+    gap: 10px;
+}
+.reaction-buttons {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    background: white;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    animation: fadeIn 0.3s;
+}
+.reaction-container:hover .reaction-buttons {
+    display: flex;
+}
+.reaction-container {
+    position: relative;
+}
+.reaction-buttons button {
+    background-color: #f0f0f0;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.reaction-buttons button:hover {
+    transform: scale(1.2);
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+.options-menu {
+    display: none;
+    position: absolute;
+    top: 30px;
+    right: 10px;
+    background: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+.options-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: white;
+    text-align: left;
+    cursor: pointer;
+}
+.options-menu button:hover {
+    background: #f0f0f0;
+}
+.options-container {
+    position: relative;
+}
+.options-container:hover .options-menu {
+    display: block;
+}
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment-section {
+    display: none;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    padding-right: 10px;
+}
+.comment-section textarea {
+    width: 100%;
+    resize: none;
+}
