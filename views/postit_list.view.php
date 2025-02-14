@@ -40,6 +40,7 @@
             </ul>
         </div>
     </nav>
+<<<<<<< HEAD
     <div class="container-fluid">
         <div class="middle-column">
             <div class="create_postit">
@@ -78,6 +79,98 @@
                     <div class="card-body">
                         <a href="#" class="card-title">Post partagé pour vous</a>
                     </div>
+=======
+    <div class="contrainer-fluid">
+        <div class="top">
+            <div class="create_postit">
+                <h5 class="card-title">La liste de vos Post-it</h5>
+                <button class="btn btn-primary" onclick="window.location.href='?action=create'">Nouveau</button>
+            </div>
+            <div class="create_postit">
+                <h5 class="card-title">Post partagé pour vous</h5>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="middle-column">
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>  
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>  
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>  
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+            <div class="postit-card card">
+                <div class="card-body">
+                    <div>
+                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
+                        <p>Publié par John Doe</p>  
+                        <small class="text-muted">Publié le: 2023-10-02</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-column">
+            <div class="postit-card card">
+                <div class="card-body">
+                    <a href="#" class="card-title">Post partagé pour vous</a>
+>>>>>>> 2a3b4b10d2f63743dd6def6e14b0219dc176066b
                 </div>
             </div>
         </div>

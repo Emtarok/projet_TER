@@ -131,6 +131,7 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+<<<<<<< HEAD
 .title{
     display: flex;
     justify-content: space-between;
@@ -151,6 +152,10 @@ body {
 }
 .create_postit {
     /* display: flex; */
+=======
+.create_postit {
+    display: flex;
+>>>>>>> 2a3b4b10d2f63743dd6def6e14b0219dc176066b
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
@@ -170,7 +175,10 @@ body {
     margin-bottom: 20px;
 }
 .postit-card {
+<<<<<<< HEAD
     padding: 10px;
+=======
+>>>>>>> 2a3b4b10d2f63743dd6def6e14b0219dc176066b
     margin-bottom: 15px;
     position: relative;
 }
