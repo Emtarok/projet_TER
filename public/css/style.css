@@ -1,3 +1,12 @@
+/* Couleurs du site */
+:root {
+    --color-primary: #A8E8F9;
+    --color-secondary: #00537A;
+    --color-tertiary: #013C58;
+    --color-accent1: #F5A201;
+    --color-accent2: #FFBA42;
+    --color-accent3: #FFD358;
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -121,6 +130,12 @@ body {
 }
 .search-container button:hover {
     color: #007bff;
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+    text-decoration: underline;
+    transform: scale(1.);
+    color: #F5A201;
+    transition: all 0.3s;
 }
 .middle-column {
     width: 50%;
