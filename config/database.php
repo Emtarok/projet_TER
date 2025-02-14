@@ -1,7 +1,7 @@
 <?php
 function db_connect() {
     $host = "localhost";
-    $dbname = "postit";
+    $dbname = "ter";
     $username = "root";
     $password = "";
 
