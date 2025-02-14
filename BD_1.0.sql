@@ -1,4 +1,6 @@
 CREATE DATABASE postit;
+USE postit;
+
 
 CREATE TABLE utilisateurs (
     idutilisateur INT AUTO_INCREMENT PRIMARY KEY,
