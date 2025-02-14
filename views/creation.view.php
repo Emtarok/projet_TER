@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./public/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>Créer un Post-it</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 mb-4">
@@ -45,14 +46,16 @@
             <div class="postit-form card">
                 <div class="card-body">
                     <h2>Créer un post</h2>
-                    <form>
+                    <form action="?action=create_postit" method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Title">
+                            <label for="title">Titre:</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" rows="3" placeholder="Content"></textarea>
+                            <label for="content">Contenu:</label>
+                            <textarea class="form-control" id="content" rows="3" name="content" required></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Publier</button>
+                        <button type="submit" class="btn btn-primary">Créer</button>
                     </form>
                 </div>
             </div>
