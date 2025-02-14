@@ -16,4 +16,22 @@ function get_data() {
     mysqli_close($conn);
     return $data;
 }
+
+function create_postit($title, $content) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "INSERT INTO postit (titre, contenu, date_post) VALUES ('$title', '$content', NOW())";
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            mysqli_close($conn);
+            return $result;
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
+}
 ?>
