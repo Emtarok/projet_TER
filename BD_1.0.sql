@@ -1,7 +1,6 @@
 CREATE DATABASE postit;
 USE postit;
 
-
 CREATE TABLE utilisateurs (
     idutilisateur INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100) NOT NULL,
@@ -17,8 +16,7 @@ CREATE TABLE postit (
     titre VARCHAR(200) NOT NULL,
     contenu TEXT NOT NULL,
     date DATETIME NOT NULL,
-    idutilisateur INT NOT NULL,
-    FOREIGN KEY (idutilisateur) REFERENCES utilisateurs(id_utilisateur) ON DELETE CASCADE
+    idutilisateur INT NOT NULL
 );
 
 CREATE TABLE faits (
@@ -31,6 +29,11 @@ CREATE TABLE faits (
     FOREIGN KEY (id_utilisateur_partage) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE,
     UNIQUE (id_postit, id_utilisateur_partage)
 );
+
+ALTER TABLE postit
+ADD CONSTRAINT FK_postit_utilisateur
+FOREIGN KEY (idutilisateur) REFERENCES faits(id_utilisateur)
+ON DELETE CASCADE;
 
 INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
 VALUES ('Vuillot', 'Kevin-Swami', 'kevin', 'kevin@gmail.com', '2002-01-01', '');
