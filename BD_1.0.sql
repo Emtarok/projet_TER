@@ -15,8 +15,8 @@ CREATE TABLE postit (
     titre VARCHAR(200) NOT NULL,
     contenu TEXT NOT NULL,
     date DATETIME NOT NULL,
-    idutilisateurs INT NOT NULL,
-    FOREIGN KEY (idutilisateur) REFERENCES utilisateur(idutilisateur) ON DELETE CASCADE
+    idutilisateur INT NOT NULL,
+    FOREIGN KEY (idutilisateur) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE
 );
 
 CREATE TABLE faits (
@@ -25,19 +25,19 @@ CREATE TABLE faits (
     id_utilisateur INT NOT NULL,
     id_utilisateur_partage INT NOT NULL,
     FOREIGN KEY (id_postit) REFERENCES postit(idpostit) ON DELETE CASCADE,
-    FOREIGN KEY (id_uutilisateur) REFERENCES utilisateur(idutilisateur) ON DELETE CASCADE,
-    FOREIGN KEY (id_utilisateur_partage) REFERENCES utilisateur(idutilisateur) ON DELETE CASCADE,
+    FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE,
+    FOREIGN KEY (id_utilisateur_partage) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE,
     UNIQUE (id_postit, id_utilisateur_partage)
 );
 
 INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('Vuillot', 'Kevin-Swami', 'kevin','01/01/2002', 'kevin@gmail.com', '');
+VALUES ('Vuillot', 'Kevin-Swami', 'kevin', 'kevin@gmail.com', '2002-01-01', '');
 
 INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('Legrand', 'Sophie', 'sophie','01/01/2002', 'sophie@gmail.com', '');
+VALUES ('Legrand', 'Sophie', 'sophie', 'sophie@gmail.com', '2002-01-01', '');
 
 INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('M''Baye', 'Fatimata', 'fatimata','01/01/2002', 'fatimata@gmail.com', '');
+VALUES ('M''Baye', 'Fatimata', 'fatimata', 'fatimata@gmail.com', '2002-01-01', '');
 
 INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('Rakotoson', 'Hasimbola', 'hasimbola','01/01/2002', 'hasimbola@gmail.com', '');
+VALUES ('Rakotoson', 'Hasimbola', 'hasimbola', 'hasimbola@gmail.com', '2002-01-01', '');
