@@ -44,26 +44,24 @@
                     <h5 class="card-title-h5">La liste de vos Post-it</h5>
                     <div></div>
                 </div>
-                <div class="postit-card card">
-                    <div class="card-body">
-                        <div>
-                            <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                            <p>Publié par John Doe</p>
-                            <small class="text-muted">Publié le: 2023-10-02</small>
+                
+                // structure d'un postit.
+                <?php
+                    foreach ($data in $datas){
+                    echo "
+                    <div class=\"postit-card card\">
+                        <div class=\"card-body\">
+                            <div>
+                                <h5 class=\"card-title\"><a href=\"?action=details\">".$data['titre']."</a></h5>
+                                <p>".$data['contenu']."</p>
+                                <small class=\"test-muted\">Publié le : ".$data['date']."</small>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="postit-card card">
-                    <div class="card-body">
-                        <div>
-                            <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                            <p>Publié par John Doe</p>  
-                            <small class="text-muted">Publié le: 2023-10-02</small>
-                        </div>
-                    </div>
-                </div>
-                </div>
+                    </div>";
+                    }
+                ?>
             </div>
+        </div>
         <div class="right-column">
             <div class="postit-card card">
                 <div class="title">

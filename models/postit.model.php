@@ -1,20 +1,21 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-function get_data() {
-    $conn = db_connect();
-    $sql = "SELECT * FROM faits";
-    $result = mysqli_query($conn, $sql);
-
-    $data = [];
-    if ($result && mysqli_num_rows($result) > 0) {
-        while ($row = mysqli_fetch_assoc($result)) {
-            $data[] = $row;
-        }
-    }
-
-    mysqli_close($conn);
-    return $data;
+function get_data($_SESSION['user_id']){
+	$userid = $_SESSION['user_id'];
+	$conn = db_connect();
+	$sql = "SELECT postit.titre, postit.contenu, postit.date FROM faits, postit WHERE ".$userid." = faits.id_utilisateur AND faits.id_post = postit.idpost ";
+	$result = mysqli_query($conn, $sql);
+	
+	$datas = [];
+	if ($result && mysqli_num_rows($result)>0 ) {
+		while ($row = mysqli_fetch_assoc($result)) {
+			$datas[] = $row;
+		}
+	}
+	
+	mysqli_close($conn);
+	return $datas;
 }
 
 function create_postit($title, $content) {
