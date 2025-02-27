@@ -1,20 +1,22 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-function get_data(){
-    session_start();
-	$userid = $_SESSION['user_id'];
+function get_data($userid){
 	$conn = db_connect();
-	$sql = "SELECT postit.titre, postit.contenu, postit.date FROM faits, postit WHERE ".$userid." = faits.id_utilisateur AND faits.id_post = postit.idpost ";
-	$result = mysqli_query($conn, $sql);
-	
-	$datas = [];
-	if ($result && mysqli_num_rows($result)>0 ) {
-		while ($row = mysqli_fetch_assoc($result)) {
-			$datas[] = $row;
-		}
-	}
-	
+    if ($conn) {
+        $sql = "SELECT postit.titre, postit.contenu, postit.date FROM faits, postit WHERE '$userid' = faits.id_utilisateur AND faits.id_post = postit.idpost ";
+        $result = mysqli_query($conn, $sql);
+        $datas = [];
+        if ($result && mysqli_num_rows($result)>0 ) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $datas[] = $row;
+            }
+        }
+        mysqli_close($conn);
+        return $datas;
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
 	mysqli_close($conn);
 	return $datas;
 }
