@@ -53,7 +53,7 @@
                     <div class=\"postit-card card\">
                         <div class=\"card-body\">
                             <div>
-                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postitid['idpost']." \">".$data['titre']."</a></h5>
+                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postitid['idpost']."\">".$data['titre']."</a></h5>
                                 <p>".$data['contenu']."</p>
                                 <small class=\"test-muted\">Publié le : ".$data['date']."</small>
                             </div>
