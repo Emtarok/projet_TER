@@ -47,6 +47,7 @@
                 
                 <!-- structure d'un postit. -->
                 <?php
+                if (!empty($data)) {
                     foreach ($data as $datas){
                     echo "
                     <div class=\"postit-card card\">

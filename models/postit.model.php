@@ -17,8 +17,6 @@ function get_data($userid){
     } else {
         return "Erreur de connexion à la base de données";
     }
-	mysqli_close($conn);
-	return $datas;
 }
 
 function create_postit($title, $content) {
