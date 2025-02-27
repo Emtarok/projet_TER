@@ -39,20 +39,26 @@
     <div class="container-fluid">
         <div class="middle-column"> 
             <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title">Post 2</h5>
-                        <p class="card-text">Contenu de mon autre post.</p>
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                    <div class="options-container">
-                        <button class="btn btn-light btn-sm"><i class="fas fa-ellipsis-h"></i></button>
-                        <div class="options-menu">
-                            <button>Modifier</button>
-                            <button>Supprimer</button>
-                        </div>
-                    </div>
-                </div>
+                // affichage du postit sélectionné
+                <?php
+                    if ($postitdetail){
+                        echo "
+                        <div class=\"card-body\">
+                            <div>
+                                <h5 class=\"card-title\">".$postitdetail['titre']."</h5>
+                                <p class=\"card-text\">".$postitdetail['contenu']."</p>
+                                <small class=\"text-muted\">Publié le: ".$postitdetail['date']."</small>
+                            </div>
+                            <div class=\"options-container\">
+                                <button class=\"btn btn-light btn-sm\"><i class=\"fas fa-ellipsis-h\"></i></button>
+                                <div class=\"options-menu\">
+                                    <button>Modifier</button>
+                                    <button>Supprimer</button>
+                                </div>
+                            </div>
+                        </div>";
+                    }
+                ?>
                 <div class="card-footer">
                     <div class="reaction-container">
                         <button class="btn btn-light btn-sm"><i class="fas fa-thumbs-up"></i> J'aime</button>
