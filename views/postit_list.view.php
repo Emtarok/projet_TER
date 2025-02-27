@@ -45,9 +45,10 @@
                     <div></div>
                 </div>
                 
-                // structure d'un postit.
+                <!-- structure d'un postit. -->
                 <?php
-                    foreach ($data in $datas){
+                if(isset($data) && is_array($data)){
+                    foreach ($data as $datas){
                     echo "
                     <div class=\"postit-card card\">
                         <div class=\"card-body\">
@@ -59,6 +60,9 @@
                         </div>
                     </div>";
                     }
+                }else {
+                    echo "<p>Aucun post-it trouvé</p>";
+                }
                 ?>
             </div>
         </div>

@@ -1,7 +1,8 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
 
-function get_data($_SESSION['user_id']){
+function get_data(){
+    session_start();
 	$userid = $_SESSION['user_id'];
 	$conn = db_connect();
 	$sql = "SELECT postit.titre, postit.contenu, postit.date FROM faits, postit WHERE ".$userid." = faits.id_utilisateur AND faits.id_post = postit.idpost ";
@@ -35,4 +36,23 @@ function create_postit($title, $content) {
         return "Erreur de connexion à la base de données";
     }
 }
+
+// fonction qui permet de récupérer les prénoms des utilisateurs depuis la base de données (utilisé pour l'autocomplétion du partage de post-it)
+function get_prenoms($terme){
+    $conn = db_connect();
+    $sql = "SELECT prenom FROM utilisateurs WHERE prenom LIKE '$terme%';";
+    $result = mysqli_query($conn, $sql);
+
+    $prenoms = [];
+    if($result && mysqli_num_rows($result)> 0) {
+        while ($row = mysqli_fetch_assoc($result))
+            $prenoms[] = $row["prenom"];
+    }else{
+
+    }
+
+    mysqli_close($conn);
+    return $prenoms;
+}
+
 ?>
