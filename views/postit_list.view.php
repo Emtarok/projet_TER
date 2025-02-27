@@ -47,7 +47,7 @@
                 
                 // structure d'un postit.
                 <?php
-                    foreach ($data in $datas){
+                    foreach ($data as $datas){
                     echo "
                     <div class=\"postit-card card\">
                         <div class=\"card-body\">
