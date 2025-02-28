@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 require_once __DIR__ . '/../models/postit.model.php';
 function handle_request() {
     $action = isset($_GET['action']) ? $_GET['action'] : 'home';
@@ -14,7 +17,7 @@ function handle_request() {
                     $content = $_POST['content'];
                     $result = create_postit($title, $content);
                     if ($result === true) {
-                        header('Location: ?action=create');
+                        header('Location: ?action=list');
                         exit();
                     } else {
                         echo $result;
@@ -23,7 +26,7 @@ function handle_request() {
                     echo "Veuillez remplir tous les champs";
                 }
             }
-            require_once __DIR__ . '/../views/creation.view.php';
+            require_once __DIR__ . '/../views/postit_list.view.php';
             break;
         /* Je voulais appelé la requête ajax en utilisant ce switch case pour utiliser le même controller mais j'ai une erreur oû de parse (le json est soit vide soit ce n'est pas un json)
         case 'autocomplete':

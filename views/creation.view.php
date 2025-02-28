@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +39,7 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
                 </li>
             </ul>
         </div>

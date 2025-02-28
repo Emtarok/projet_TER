@@ -1,3 +1,8 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +35,7 @@
                     <a class="nav-link" href="contact.html">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="./index.html">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
                 </li>
             </ul>
         </div>
@@ -38,20 +43,26 @@
     <div class="container-fluid">
         <div class="middle-column"> 
             <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title">Post 2</h5>
-                        <p class="card-text">Contenu de mon autre post.</p>
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                    <div class="options-container">
-                        <button class="btn btn-light btn-sm"><i class="fas fa-ellipsis-h"></i></button>
-                        <div class="options-menu">
-                            <button>Modifier</button>
-                            <button>Supprimer</button>
-                        </div>
-                    </div>
-                </div>
+            <!-- // affichage du postit sélectionné -->
+                <?php
+                    foreach ($postitdetail as $postitdetail){
+                        echo "
+                        <div class=\"card-body\">
+                            <div>
+                                <h5 class=\"card-title\">".$postitdetail['titre']."</h5>
+                                <p class=\"card-text\">".$postitdetail['contenu']."</p>
+                                <small class=\"text-muted\">Publié le: ".$postitdetail['date_post']."</small>
+                            </div>
+                            <div class=\"options-container\">
+                                <button class=\"btn btn-light btn-sm\"><i class=\"fas fa-ellipsis-h\"></i></button>
+                                <div class=\"options-menu\">
+                                    <button onclick=\"redirectTo(this)\">Modifier</button>
+                                    <button>Supprimer</button>
+                                </div>
+                            </div>
+                        </div>";
+                    }
+                ?>
                 <div class="card-footer">
                     <div class="reaction-container">
                         <button class="btn btn-light btn-sm"><i class="fas fa-thumbs-up"></i> J'aime</button>

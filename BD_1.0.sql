@@ -21,9 +21,9 @@ CREATE TABLE postit (
 
 CREATE TABLE faits (
     idfaits INT AUTO_INCREMENT PRIMARY KEY,
-    id_postit INT NOT NULL,
+    id_postit INT,
     id_utilisateur INT NOT NULL,
-    id_utilisateur_partage INT NOT NULL,
+    id_utilisateur_partage INT,
     FOREIGN KEY (id_postit) REFERENCES postit(idpostit) ON DELETE CASCADE,
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE,
     FOREIGN KEY (id_utilisateur_partage) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE,

@@ -48,6 +48,10 @@ switch ($action) {
         require_once __DIR__ . '/controllers/creation.controller.php';
         break;
 
+    case "deconnexion":
+        require_once __DIR__ . '/controllers/connexion.controller.php';
+        break;
+
     default:
         require_once __DIR__ . '/controllers/controller.php';
         break;

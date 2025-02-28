@@ -1,8 +1,14 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 mb-4">
@@ -30,7 +36,7 @@
                     <a class="nav-link" href="#">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
                 </li>
             </ul>
         </div>
@@ -43,23 +49,22 @@
                     <h5 class="card-title-h5">La liste de vos Post-it</h5>
                     <div></div>
                 </div>
-                
                 <!-- structure d'un postit. -->
                 <?php
                 if (!empty($data)) {
-                    foreach ($data as $datas){
+                    foreach ($data as $postit){
                     echo "
                     <div class=\"postit-card card\">
                         <div class=\"card-body\">
                             <div>
-                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$data['idpost']."\">".$data['titre']."</a></h5>
-                                <p>".$data['contenu']."</p>
-                                <small class=\"test-muted\">Publié le : ".$data['date']."</small>
+                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postit['idpostit']."\">".$postit['titre']."</a></h5>
+                                <p>".$postit['contenu']."</p>
+                                <small class=\"test-muted\">Publié le : ".$postit['date_post']."</small>
                             </div>
                         </div>
                     </div>";
                     }
-                }else {
+                } else {
                     echo "<p>Aucun post-it trouvé</p>";
                 }
                 ?>
