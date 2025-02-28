@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 require_once __DIR__ . '/../config/database.php';
 
 function get_data($userid){

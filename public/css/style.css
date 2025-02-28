@@ -277,3 +277,11 @@ body {
     width: 100%;
     resize: none;
 }
+
+/* css pour la croix rouge de suppresion des utilisateurs selectionnes dans l'autocompletion*/
+
+.croix {
+    color: #1c87c9;
+    text-shadow: 2px 2px 4px #00ffff;
+    font-size: 30px;
+  }
