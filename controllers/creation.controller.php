@@ -1,4 +1,8 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+
 require_once __DIR__ . '/../models/postit.model.php';
 function handle_request() {
     $action = isset($_GET['action']) ? $_GET['action'] : 'home';
