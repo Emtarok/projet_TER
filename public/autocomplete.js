@@ -45,7 +45,7 @@ $(document).ready(function () {
         let prenom = $(this).text();
         if (!utilisateursSelectionnes.includes(prenom)) {
             utilisateursSelectionnes.push(prenom);
-            $("#utilisateurs_selectionnes").append(`<span class="badge bg-primary m-1 p-2">${prenom} <button type="button" class=""btn-close btn-sm remove-user" data-user="${prenom}"></button></span>`);
+            $("#utilisateurs_selectionnes").append(`<span class="badge bg-primary m-1 p-2">${prenom} <i class="croix fas fa-times remove-user" data-user="${prenom}"></i></span>`);
             $("#prenom_partage").val("");
             $("#suggestions").hide();
         }
@@ -54,7 +54,7 @@ $(document).ready(function () {
     // Suppression de l'utilisateur selectionne
     $(document).on("click", ".remove-user", function() {
         let prenom = $(this).data("user");
-        utilisateursSelectionnes = utilisateursSelectionnes.filter(prenom => prenom !== prenom);
+        utilisateursSelectionnes = utilisateursSelectionnes.filter(user => user !== prenom);
         $(this).parent().remove();
         $("#utilisateurs_partages").val(JSON.stringify(utilisateursSelectionnes));
     });

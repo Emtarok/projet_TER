@@ -8,7 +8,11 @@ require_once __DIR__ . '/../config/database.php';
 function get_data($userid){
 	$conn = db_connect();
     if ($conn) {
-        $sql = "SELECT postit.titre, postit.contenu, postit.date, postit.idpost FROM faits, postit WHERE '$userid' = faits.id_utilisateur AND faits.id_post = postit.idpost ";
+        //verifie que $userid est une chaine de caracteres ou un entier avant de l'utiliser dans le SQL
+        if (is_array($userid)) {
+            $userid = implode(',', $userid); // implode permet de convertir en une chaine de caractere
+        }
+        $sql = "SELECT postit.titre, postit.contenu, postit.date, postit.idpostit FROM faits, postit WHERE '$userid' = faits.id_utilisateur AND faits.id_postit = postit.idpostit ";
         $result = mysqli_query($conn, $sql);
         $datas = [];
         if ($result && mysqli_num_rows($result)>0 ) {
