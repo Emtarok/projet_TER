@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <<link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 mb-4">
@@ -40,7 +39,7 @@
         <div class="middle-column"> 
             <div class="postit-card card">
                 <div class="card-body">
-                    <div>
+                    <div id=<?php echo "postit-".$postit->getId();?>>
                         <h5 class="card-title">Post 2</h5>
                         <p class="card-text">Contenu de mon autre post.</p>
                         <small class="text-muted">Publié le: 2023-10-02</small>
@@ -48,7 +47,7 @@
                     <div class="options-container">
                         <button class="btn btn-light btn-sm"><i class="fas fa-ellipsis-h"></i></button>
                         <div class="options-menu">
-                            <button>Modifier</button>
+                            <button onclick="redirectTo(this)">Modifier</button>
                             <button>Supprimer</button>
                         </div>
                     </div>
@@ -81,6 +80,9 @@
             commentSection.style.paddingRight = '10px';
             commentSection.style.marginLeft = '10px';
             commentSection.style.marginBottom = '10px';
+        }
+        function redirectTo(button) {
+            window.location.href = '?action=update';
         }
     </script>
 </body>

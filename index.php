@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./public/css/style.css">
     <title>Post-It</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -39,6 +40,10 @@ switch ($action) {
         break;
     
     case 'create_postit':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+
+    case 'update':
         require_once __DIR__ . '/controllers/creation.controller.php';
         break;
 

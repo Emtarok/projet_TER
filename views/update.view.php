@@ -21,16 +21,16 @@
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?action=list">Accueil</a>
+                    <a class="nav-link" href="/postit.html">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profil</a>
+                    <a class="nav-link" href="profile.html">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="contact.html">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Deconnexion</a>
+                    <a class="nav-link" href="./index.html">Deconnexion</a>
                 </li>
             </ul>
         </div>
@@ -39,17 +39,17 @@
         <div class="middle-column">
             <div class="postit-form card">
                 <div class="card-body">
-                    <h2>Créer un post</h2>
-                    <form action="?action=create_postit" method="POST">
+                    <h2>Modifier un post</h2>
+                    <form action="?action=update" method="POST">
                         <div class="form-group">
-                            <label for="title">Titre:</label>
-                            <input type="text" class="form-control" id="title" name="title" required>
+                            <label for="title">Titre:<?php get_title() ?></label>
+                            <input type="text" class="form-control" id="title" name="title" value="<?= $postit->getTitle() ?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="content">Contenu:</label>
-                            <textarea class="form-control" id="content" rows="3" name="content" required></textarea>
+                            <label for="content">Contenu: <?php get_content() ?></label>
+                            <textarea class="form-control" id="content" rows="3" name="content" required><?= $postit->getContent() ?></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Créer</button>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
                     </form>
                 </div>
             </div>
