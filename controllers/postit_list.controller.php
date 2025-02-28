@@ -12,11 +12,7 @@ function handle_request() {
             $data = get_data($userid);
             // si récupération du numéro de session en cours non nul (utilisateur connecté) -> OK
             // je ne vérifie pas si utilisateur dans la bdd, car déjà fait lors de la connexion.
-            if (!empty($data)) {
-                require_once __DIR__ . '/../views/postit_list.view.php';
-            } else {
-                echo "Erreur lors de la récupération des données. Pas d'utilisateur connecté ou aucun post-it trouvé.";
-            }
+            require_once __DIR__ . '/../views/postit_list.view.php';
             break;
         
         case 'details':

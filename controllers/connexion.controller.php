@@ -23,6 +23,7 @@ function handle_request() {
                             $_SESSION['pseudo'] = $user['pseudo'];
                             echo "Connexion réussie";
                             //envoyer l'utilisateur à la page postit_list
+                            header('Location: index.php?action=list');
                             require_once __DIR__ . '/../views/postit_list.view.php';
                             exit();
                         }else{
@@ -44,7 +45,6 @@ function handle_request() {
         case "deconnexion":
             session_start();
             session_destroy();
-            header('Location: index.php');
             require_once __DIR__ . '/../views/connexion.view.php';
             break;
 

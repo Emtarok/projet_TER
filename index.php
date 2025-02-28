@@ -17,7 +17,7 @@
 </body>
 </html>
 <?php
-$action = isset($_GET['action']) ? $_GET['action'] : 'home';
+$action = isset($_GET['action']) ? $_GET['action'] : 'list';
 
 switch ($action) {
     case 'connexion':

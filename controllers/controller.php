@@ -7,7 +7,7 @@ function handle_request() {
 
     switch ($action) {
         case 'home':
-            require_once __DIR__ . '/../views/connexion.view.php';
+            require_once __DIR__ . '/../views/postit_list.view.php';
             break;
 
         case 'connexion':
