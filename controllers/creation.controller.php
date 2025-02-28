@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../models/postit.model.php';
-
 function handle_request() {
     $action = isset($_GET['action']) ? $_GET['action'] : 'home';
     switch ($action) {
@@ -26,6 +25,13 @@ function handle_request() {
             }
             require_once __DIR__ . '/../views/creation.view.php';
             break;
+        /* Je voulais appelé la requête ajax en utilisant ce switch case pour utiliser le même controller mais j'ai une erreur oû de parse (le json est soit vide soit ce n'est pas un json)
+        case 'autocomplete':
+            $prenoms = get_utilisateurs_prenoms($_GET['terme']);
+            header('Content-Type: application/json');
+            echo json_encode($prenoms);
+            break;
+        */
 
         case 'update':
             require_once __DIR__ . '/../views/update.view.php';

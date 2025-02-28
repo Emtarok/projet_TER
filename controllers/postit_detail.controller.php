@@ -10,7 +10,17 @@ function handle_request() {
             break;
         
         case 'details':
-            require_once __DIR__ . '/../views/postit_detail.view.php';
+            if (isset($_GET['id'])) {
+                $postitid = $_GET['id'];
+                $postit = postit_id($postitid);
+                if ($postit) {
+                    require_once __DIR__ . '/../views/postit_detail.view.php';
+                } else {
+                    echo "Postit non trouvé";
+                }
+            } else {
+                echo "ID de postit vide"
+            }
             break;
         
         default:

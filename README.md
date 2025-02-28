@@ -2,7 +2,8 @@ Répértoire pour le projet de TER
 
 Date limite : 6 mars 12h00
 
-Outils de gestion de projet : Trello, Bizagi, Excel Outils de développement : Git, php, html/css, Javascript, BootStrap, Jquery
+Outils de développement : Git, php, html/css, Javascript, BootStrap, Jquery
+Outils de gestion de projet : Trello, Bizagi, Excel 
 
 Base de donnée :
 

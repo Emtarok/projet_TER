@@ -15,7 +15,7 @@ CREATE TABLE postit (
     idpostit INT AUTO_INCREMENT PRIMARY KEY,
     titre VARCHAR(200) NOT NULL,
     contenu TEXT NOT NULL,
-    date DATETIME NOT NULL,
+    date_post DATETIME NOT NULL,
     idutilisateur INT NOT NULL
 );
 

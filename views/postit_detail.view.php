@@ -39,7 +39,7 @@
         <div class="middle-column"> 
             <div class="postit-card card">
                 <div class="card-body">
-                    <div id=<?php echo "postit-".$postit->getId();?>>
+                    <div>
                         <h5 class="card-title">Post 2</h5>
                         <p class="card-text">Contenu de mon autre post.</p>
                         <small class="text-muted">Publié le: 2023-10-02</small>
@@ -47,7 +47,7 @@
                     <div class="options-container">
                         <button class="btn btn-light btn-sm"><i class="fas fa-ellipsis-h"></i></button>
                         <div class="options-menu">
-                            <button onclick="redirectTo(this)">Modifier</button>
+                            <button>Modifier</button>
                             <button>Supprimer</button>
                         </div>
                     </div>
