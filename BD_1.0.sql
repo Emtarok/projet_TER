@@ -34,15 +34,3 @@ ALTER TABLE postit
 ADD CONSTRAINT FK_postit_utilisateur
 FOREIGN KEY (idutilisateur) REFERENCES faits(id_utilisateur)
 ON DELETE CASCADE;
-
-INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('Vuillot', 'Kevin-Swami', 'kevin', 'kevin@gmail.com', '2002-01-01', '');
-
-INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('Legrand', 'Sophie', 'sophie', 'sophie@gmail.com', '2002-01-01', '');
-
-INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('M''Baye', 'Fatimata', 'fatimata', 'fatimata@gmail.com', '2002-01-01', '');
-
-INSERT INTO utilisateurs (nom, prenom, pseudo, email, date_naissance, motdepasse)
-VALUES ('Rakotoson', 'Hasimbola', 'hasimbola', 'hasimbola@gmail.com', '2002-01-01', '');

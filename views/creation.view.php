@@ -77,6 +77,16 @@ if (!isset($_SESSION)) {
 
                          <button type="submit" class="btn btn-primary">Créer</button>
                     </form>
+
+                    <!-- Affichage du contenu des tableaux pour vérification -->
+                    <div class="mt-4">
+                        <h5>Contenu du tableau utilisateursSelectionnes :</h5>
+                        <pre id="utilisateursSelectionnesContent"></pre>
+                    </div>
+                    <div class="mt-4">
+                        <h5>Contenu du tableau selectedUsers :</h5>
+                        <pre id="selectedUsersContent"></pre>
+                    </div>
                 </div>
             </div>
         </div>

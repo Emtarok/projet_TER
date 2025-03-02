@@ -15,6 +15,14 @@ function handle_connexion_request() {
                     $user = get_data($email);
                     if ($user !== null) {
                         //vérification du mot de passe
+                        session_start();
+                            $_SESSION['user_id'] = $user['idutilisateur'];
+                            $_SESSION['email'] = $user['email'];
+                            $_SESSION['pseudo'] = $user['pseudo'];
+                            //envoyer l'utilisateur à la page postit_list
+                            header('Location: index.php?action=list');
+                            exit();
+                        /*
                         if (password_verify($password, $user['motdepasse'])) {
                             session_start();
                             $_SESSION['user_id'] = $user['idutilisateur'];
@@ -25,7 +33,7 @@ function handle_connexion_request() {
                             exit();
                         }else{
                             // echo "Mot de passe incorrect";
-                        }
+                        }*/
                     }else{
                         // echo "Email incorrect";
                         require_once __DIR__ . '/../views/connexion.view.php';
