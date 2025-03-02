@@ -8,6 +8,7 @@ if (!isset($_SESSION)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 mb-4">
@@ -26,16 +27,16 @@ if (!isset($_SESSION)) {
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/postit.html">Accueil</a>
+                    <a class="nav-link" href="?action=list">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Profil</a>
+                    <a class="nav-link" href="?action=profil">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="?action=contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Déconnexion</a>
                 </li>
             </ul>
         </div>
@@ -44,15 +45,16 @@ if (!isset($_SESSION)) {
         <div class="middle-column">
             <div class="postit-form card">
                 <div class="card-body">
-                    <h2>Modifier un post</h2>
-                    <form action="?action=update" method="POST">
+                    <h2>Modifier le post</h2>
+                    <form action="?action=update_postit" method="POST">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($_GET['id']); ?>">
                         <div class="form-group">
-                            <label for="title">Titre:<?php get_title() ?></label>
-                            <input type="text" class="form-control" id="title" name="title" value="<?= $postit->getTitle() ?>" required>
+                            <label for="title">Titre:</label>
+                            <input type="text" class="form-control" id="title" name="title" value="<?php echo htmlspecialchars($postit['titre']); ?>" required>
                         </div>
                         <div class="form-group">
-                            <label for="content">Contenu: <?php get_content() ?></label>
-                            <textarea class="form-control" id="content" rows="3" name="content" required><?= $postit->getContent() ?></textarea>
+                            <label for="content">Contenu:</label>
+                            <textarea class="form-control" id="content" rows="3" name="content" required><?php echo htmlspecialchars($postit['contenu']); ?></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Modifier</button>
                     </form>

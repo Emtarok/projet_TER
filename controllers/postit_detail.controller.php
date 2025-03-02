@@ -28,7 +28,8 @@ function handle_request() {
             break;
         
         default:
-            echo "Page non trouvée.";
+            require_once __DIR__ . '/controllers/controller.php';
+            break;
     }
 }
 ?>

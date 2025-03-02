@@ -159,7 +159,7 @@ function get_content($id) {
 function update_postit($id, $title, $content) {
     $conn = db_connect();
     if ($conn) {
-        $sql = "UPDATE postit SET titre=?, contenu=? WHERE id=?";
+        $sql = "UPDATE postit SET titre=?, contenu=? WHERE idpostit=?";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
             mysqli_stmt_bind_param($stmt, "ssi", $title, $content, $id);
@@ -208,6 +208,62 @@ function get_prenoms($terme){
         $error = mysqli_error($conn);
         mysqli_close($conn);
         return "Erreur lors de la préparation de la requête: " . $error;
+    }
+}
+
+function get_postit_details($id) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "SELECT titre, contenu FROM postit WHERE idpostit = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $postit = null;
+            if ($result && mysqli_num_rows($result) > 0) {
+                $postit = mysqli_fetch_assoc($result);
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            return $postit;
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
+}
+
+function delete_postit($id) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "DELETE FROM postit WHERE idpostit = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            $result = mysqli_stmt_execute($stmt);
+            if ($result) {
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+                echo "çafonctionne jusqu'ici";
+                return true;
+            } else {
+                $error = mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+                echo "Requete pas prete";
+                return "Erreur " . $error;
+            }
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête de suppression du post-it: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
     }
 }
 ?>

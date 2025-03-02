@@ -8,6 +8,10 @@ function handle_request() {
     $action = isset($_GET['action']) ? $_GET['action'] : 'home';
     switch ($action) {
         case 'list':
+            if (!isset($_SESSION['user_id'])) {
+                header('Location: index.php?action=connexion');
+                exit();
+            }
             $userid = $_SESSION['user_id'];
             $data = get_data($userid);
             // si récupération du numéro de session en cours non nul (utilisateur connecté) -> OK
@@ -16,11 +20,22 @@ function handle_request() {
             break;
         
         case 'details':
-            require_once __DIR__ . '/../views/postit_details.view.php';
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $postitdetail = postit_id($id);
+                if ($postitdetail) {
+                    require_once __DIR__ . '/../views/postit_detail.view.php';
+                } else {
+                    echo "Post-it non trouvé";
+                }
+            } else {
+                echo "ID du post-it manquant";
+            }
             break;
         
         default:
-            echo "Page non trouvée.";
+            require_once __DIR__ . '/../controllers/controller.php';
+            break;
     }
 }
 ?>

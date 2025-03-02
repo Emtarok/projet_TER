@@ -17,11 +17,16 @@
 </body>
 </html>
 <?php
-$action = isset($_GET['action']) ? $_GET['action'] : 'list';
+$action = isset($_GET['action']) ? $_GET['action'] : 'connexion';
+
+if ($action !== 'connexion' && $action !== 'inscription') {
+    require_once __DIR__ . '/config/session_check.php';
+}
 
 switch ($action) {
     case 'connexion':
         require_once __DIR__ . '/controllers/connexion.controller.php';
+        handle_connexion_request();
         break;
 
     case 'inscription':
@@ -48,12 +53,25 @@ switch ($action) {
         require_once __DIR__ . '/controllers/creation.controller.php';
         break;
 
+    case 'update_postit':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+
+    case 'delete':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+        
     case "deconnexion":
         require_once __DIR__ . '/controllers/connexion.controller.php';
+        handle_connexion_request();
+        break;
+
+    case 'profil':
+        require_once __DIR__ . '/controllers/profil.controller.php';
         break;
 
     default:
-        require_once __DIR__ . '/controllers/controller.php';
+        require_once __DIR__ . '/views/404.view.php';
         break;
 }
 

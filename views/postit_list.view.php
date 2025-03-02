@@ -30,13 +30,13 @@ if (!isset($_SESSION)) {
                     <a class="nav-link" href="?action=list">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profil</a>
+                    <a class="nav-link" href="?action=profil">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="?action=contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Déconnexion</a>
                 </li>
             </ul>
         </div>
@@ -52,6 +52,7 @@ if (!isset($_SESSION)) {
                 <!-- structure d'un postit. -->
                 <?php
                 if (!empty($data)) {
+                    echo $_SESSION['message'] ?? '';
                     foreach ($data as $postit){
                     echo "
                     <div class=\"postit-card card\">

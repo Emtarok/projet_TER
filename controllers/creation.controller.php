@@ -28,16 +28,19 @@ function handle_request() {
             }
             require_once __DIR__ . '/../views/postit_list.view.php';
             break;
-        /* Je voulais appelé la requête ajax en utilisant ce switch case pour utiliser le même controller mais j'ai une erreur oû de parse (le json est soit vide soit ce n'est pas un json)
-        case 'autocomplete':
-            $prenoms = get_utilisateurs_prenoms($_GET['terme']);
-            header('Content-Type: application/json');
-            echo json_encode($prenoms);
-            break;
-        */
 
         case 'update':
-            require_once __DIR__ . '/../views/update.view.php';
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $postit = get_postit_details($id);
+                if ($postit) {
+                    require_once __DIR__ . '/../views/update.view.php';
+                } else {
+                    echo "Post-it non trouvé";
+                }
+            } else {
+                echo "ID du post-it manquant";
+            }
             break;
         
         case 'update_postit':
@@ -58,6 +61,21 @@ function handle_request() {
                 }
             }
             require_once __DIR__ . '/../views/update.view.php';
+            break;
+
+        case 'delete':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $result = delete_postit($id);
+                if ($result === true) {
+                    header('Location: ?action=list');
+                    exit();
+                } else {
+                    echo $result;
+                }
+            } else {
+                echo "ID du post-it manquant";
+            }
             break;
 
         default:

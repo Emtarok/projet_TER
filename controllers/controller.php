@@ -7,8 +7,12 @@ function handle_request() {
 
     switch ($action) {
         case 'home':
-            require_once __DIR__ . '/../views/postit_list.view.php';
+            require_once __DIR__ . '/../views/connexion.view.php';
             break;
+        
+        case 'list':
+            require_once __DIR__ . '/../views/postit_list.view.php';
+            break;  
 
         case 'connexion':
             require_once __DIR__ . '/../views/connexion.view.php'; 
@@ -19,7 +23,8 @@ function handle_request() {
             break;
 
         default:
-            echo "Page non trouvée.";
+            require_once __DIR__ . '/../views/404.view.php';
+            break;
     }
 }
 ?>
