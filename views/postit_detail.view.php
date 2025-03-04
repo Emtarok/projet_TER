@@ -71,7 +71,7 @@ if (!isset($_SESSION)) {
                             <button class="btn btn-light btn-sm" style="color: #FFD700;"><i class="fas fa-laugh"></i></button>
                             <button class="btn btn-light btn-sm" style="color: #FF4500;"><i class="fas fa-angry"></i></button>
                             <button class="btn btn-light btn-sm" style="color: #1E90FF;"><i class="fas fa-sad-tear"></i></button>
-                            <button class="btn btn-light btn-sm" style="color: #FF1493;"><i class="fas fa-heart\"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #FF1493;"><i class="fas fa-heart"></i></button>
                         </div>
                     </div>
                     <button class="btn btn-light btn-sm" onclick="toggleCommentSection(this)"><i class="fas fa-comment"></i> Commenter</button>

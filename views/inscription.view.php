@@ -59,73 +59,7 @@
             </div>
         </div>
     </div>
-    <!-- <script src="../public/js/verification.js"></script>s -->
     <script>
-        // $(document).ready(function{
-        //     $("#inscriptionForm").validate({
-        //         rules: {
-        //             nom: {
-        //                 required: true,
-        //             },
-        //             prenom: {
-        //                 required: true,
-        //             },
-        //             pseudo: {
-        //                 required: true,
-        //             },
-        //             email: {
-        //                 required: true,
-        //                 email: true
-        //             },
-        //             date_naissance: {
-        //                 required: true,
-        //                 date: true
-        //             },
-        //             password: {
-        //                 required: true,
-        //                 minlength: 6
-        //             },
-        //             confirm_password: {
-        //                 required: true,
-        //                 equalTo: "#signup-password"
-        //             },
-        //         },
-        //             messages: {
-        //                 nom: "Veuillez entrer votre nom",
-        //                 prenom: "Veuillez entrer votre prénom",
-        //                 pseudo: {
-        //                     required: "Veuillez entrer votre pseudo",
-        //                     minlength: "Le pseudo doit contenir au moins 2 caractères"
-        //                 },
-        //                 email: {
-        //                     required: "Veuillez entrer votre email",
-        //                     email: "Veuillez entrer une adresse email valide"
-        //                 },
-        //                 date_naissance: {
-        //                     required: "Veuillez entrer votre date de naissance",
-        //                     date: "Veuillez entrer une date valide"
-        //                 },
-        //                 password: {
-        //                     required: "Veuillez entrer votre mot de passe",
-        //                     minlength: "Le mot de passe doit contenir au moins 6 caractères"
-        //                 },
-        //                 confirm_password: {
-        //                     required: "Veuillez confirmer votre mot de passe",
-        //                     equalTo: "Les mots de passe ne correspondent pas"
-        //                 },
-        //         },
-        //         //soumettre le formulaire seulement si il est valide
-        //         submitHandler: function(form) {
-        //             form.submit();
-        //         },
-        //         $("#inscriptionForm").submit(function(event) {
-        //             if (!$(this).valid()) {
-        //                 event.preventDefault(); 
-        //             }
-                
-        //         });
-        //     });
-        // });
         function redirectToSignIn() {
             window.location.href = '?action=connexion';
         }
@@ -141,66 +75,71 @@
                 icon.classList.add('fa-eye');
             }
         }
-        function validateForm(){
-            let isValid = true;
-            // Modifier le DOM en effacant le message precedent
-            document.getElementById('msg-nom').innerText = '';
-            document.getElementById('msg-pr').innerText = '';
-            document.getElementById('msg-email').innerText = '';
-            document.getElementById('msg-date').innerText = '';
-            document.getElementById('msg-password1').innerText = '';
-            document.getElementById('msg-password2').innerText = '';
-            // Verifier le nom
-            const nom = document.getElementById('nom').value;
-            if (nom.trim() === '') {
-                document.getElementById('msg-nom').innerText = 'Le nom est requis.';
-                isValid = false;
-            }
-            // Verifier le prenom
-            const prenom = document.getElementById('prenom').value;
-            if (prenom.trim() === '') {
-                document.getElementById('msg-pr').innerText = 'Le prénom est requis.';
-                isValid = false;
-            }
-            // Verifier que l'email renseigne est bien un email
-            const email = document.getElementById('email').value;
-            if (email.trim() === '') {
-                document.getElementById('msg-email').innerText = 'L\'email est requis.';
-                isValid = false;
-            } else if (!email.includes('@')) {
-                document.getElementById('msg-email').innerText = 'L\'email doit contenir un @.';
-                isValid = false;
-            }
-            // Verifier la date de naissance
-            const date_naissance = document.getElementById('date_naissance').value;
-            if (date_naissance.trim() === '') {
-                document.getElementById('msg-date').innerText = 'La date de naissance est requise.';
-                isValid = false;
-            } else if (!moment(date_naissance, 'YYYY-MM-DD', true).isValid()) {
-                document.getElementById('msg-date').innerText = 'La date de naissance doit être au format YYYY-MM-DD.';
-                isValid = false;
-            }
-            // Verifier le mot de passe
-            const password = document.getElementById('signup-password').value;
-            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
-            if (password.trim() === '') {
-                document.getElementById('msg-password1').innerText = 'Le mot de passe est requis.';
-                isValid = false;
-            } else if (!passwordRegex.test(password)) {
-                document.getElementById('msg-password1').innerText = 'Le mot de passe doit contenir au moins 6 caractères, un chiffre, un symbole et des lettres.';
-                isValid = false;
-            }
-            // Verifier la confirmation de mot de passe
-            const confirm_password = document.getElementById('signup-confirm-password').value;
-            if (confirm_password.trim() === '') {
-                document.getElementById('msg-password2').innerText = 'La confirmation de mot de passe est requise.';
-                isValid = false;
-            } else if (confirm_password !== password) {
-                document.getElementById('msg-password2').innerText = 'Les mots de passe ne correspondent pas.';
-                isValid = false;
-            }
-            return isValid;
-        }
+        $(document).ready(function{
+            $("#inscriptionForm").validate({
+                rules: {
+                    nom: {
+                        required: true,
+                    },
+                    prenom: {
+                        required: true,
+                    },
+                    pseudo: {
+                        required: true,
+                    },
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    date_naissance: {
+                        required: true,
+                        date: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6
+                    },
+                    confirm_password: {
+                        required: true,
+                        equalTo: "#signup-password"
+                    },
+                },
+                    messages: {
+                        nom: "Veuillez entrer votre nom",
+                        prenom: "Veuillez entrer votre prénom",
+                        pseudo: {
+                            required: "Veuillez entrer votre pseudo",
+                            minlength: "Le pseudo doit contenir au moins 2 caractères"
+                        },
+                        email: {
+                            required: "Veuillez entrer votre email",
+                            email: "Veuillez entrer une adresse email valide"
+                        },
+                        date_naissance: {
+                            required: "Veuillez entrer votre date de naissance",
+                            date: "Veuillez entrer une date valide"
+                        },
+                        password: {
+                            required: "Veuillez entrer votre mot de passe",
+                            minlength: "Le mot de passe doit contenir au moins 6 caractères"
+                        },
+                        confirm_password: {
+                            required: "Veuillez confirmer votre mot de passe",
+                            equalTo: "Les mots de passe ne correspondent pas"
+                        },
+                },
+                //soumettre le formulaire seulement si il est valide
+                submitHandler: function(form) {
+                    form.submit();
+                },
+                $("#inscriptionForm").submit(function(event) {
+                    if (!$(this).valid()) {
+                        event.preventDefault(); 
+                    }
+                
+                });
+            });
+        });
     </script>
 </body>
 </html>

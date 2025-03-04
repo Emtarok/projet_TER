@@ -17,16 +17,15 @@
 </body>
 </html>
 <?php
-$action = isset($_GET['action']) ? $_GET['action'] : 'connexion';
+$action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
-if ($action !== 'connexion' && $action !== 'inscription') {
-    require_once __DIR__ . '/config/session_check.php';
-}
+// if ($action !== 'connexion' && $action !== 'inscription') {
+//     require_once __DIR__ . '/config/session_check.php';
+// }
 
 switch ($action) {
     case 'connexion':
         require_once __DIR__ . '/controllers/connexion.controller.php';
-        handle_connexion_request();
         break;
 
     case 'inscription':
@@ -63,7 +62,6 @@ switch ($action) {
         
     case "deconnexion":
         require_once __DIR__ . '/controllers/connexion.controller.php';
-        handle_connexion_request();
         break;
 
     case 'profil':
@@ -71,7 +69,7 @@ switch ($action) {
         break;
 
     default:
-        require_once __DIR__ . '/views/404.view.php';
+        require_once __DIR__ . '/controllers/controller.php';
         break;
 }
 

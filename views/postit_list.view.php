@@ -59,7 +59,6 @@ if (!isset($_SESSION)) {
                         <div class=\"card-body\">
                             <div>
                                 <h5 class=\"card-title\"><a href=\"?action=details&id=".$postit['idpostit']."\">".$postit['titre']."</a></h5>
-                                <p>".$postit['contenu']."</p>
                                 <small class=\"test-muted\">Publié le : ".$postit['date_post']."</small>
                             </div>
                         </div>

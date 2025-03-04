@@ -48,4 +48,3 @@ function set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password) {
 
 
 
-

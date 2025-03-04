@@ -21,6 +21,10 @@ function handle_request() {
         case 'inscription':
             require_once __DIR__ . '/../views/inscription.view.php';
             break;
+        
+        case 'deconnexion':
+            require_once __DIR__ . '/../views/connexion.view.php';
+            break;
 
         default:
             require_once __DIR__ . '/../views/404.view.php';

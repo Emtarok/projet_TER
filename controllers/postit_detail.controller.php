@@ -23,7 +23,6 @@ function handle_request() {
                 }
             } else {
                 echo "ID de postit vide";
-                echo "ID de postit vide";
             }
             break;
         

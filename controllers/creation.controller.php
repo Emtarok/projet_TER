@@ -15,7 +15,16 @@ function handle_request() {
                 if (isset($_POST['title']) && isset($_POST['content'])) {
                     $title = $_POST['title'];
                     $content = $_POST['content'];
-                    $result = create_postit($title, $content);
+                    // si il y a des utilisateurs qui sont selectionnes ils sont rajouté dans sharedUsers
+                    $sharedUsers = isset($_POST['utilisateurs_partages']) ? json_decode($_POST['utilisateurs_partages'], true) : [];
+                    
+                    // code pour tester si les id des utilisateurs selectionnes sont bien récupérés
+                    /*// Envoyer une réponse JSON contenant le contenu de sharedUsers
+                    header('Content-Type: application/json');
+                    echo json_encode(['sharedUsers' => $sharedUsers]);
+                    exit();*/
+
+                    $result = create_postit($title, $content, $sharedUsers);
                     if ($result === true) {
                         header('Location: ?action=list');
                         exit();
