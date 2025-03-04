@@ -27,6 +27,17 @@ function handle_request() {
                             header('Location: index.php?action=list');
                             require_once __DIR__ . '/../views/postit_list.view.php';
                             exit();
+                        /*
+                        if (password_verify($password, $user['motdepasse'])) {
+                            session_start();
+                            $_SESSION['user_id'] = $user['idutilisateur'];
+                            $_SESSION['email'] = $user['email'];
+                            $_SESSION['pseudo'] = $user['pseudo'];
+                            echo "Connexion réussie";
+                            //envoyer l'utilisateur à la page postit_list
+                            header('Location: index.php?action=list');
+                            require_once __DIR__ . '/../views/postit_list.view.php';
+                            exit();
                         }else{
                             echo "Mot de passe incorrect";
                             require_once __DIR__ . '/../views/connexion.view.php';
