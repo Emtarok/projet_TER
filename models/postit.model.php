@@ -101,16 +101,25 @@ function postit_id($positid){
 }
 
 // Fonction qui permet la création d'un post-it
+/**
+ * On récupere les données title, content, sharedUser depuis l'interface de création
+ */
 function create_postit($title, $content, $sharedUsers) {
+    /**
+     * On récupere l'id de l'utilisateur connecté grace à la session
+     */
     $user = $_SESSION['user_id'];
     $conn = db_connect();
     if ($conn) {
+        /**
+         * On a privilégié l'utilisation des requetes préparées pour éviter les injections SQL
+         */
         $sql = "INSERT INTO postit (titre, contenu, date_post, idutilisateur) VALUES (?, ?, NOW(), ?)";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
+            // Une fois que la requete est préparée, on bind les parametres, on execute la requete et on recupere le resultat
             mysqli_stmt_bind_param($stmt, "ssi", $title, $content, $user);
             $result = mysqli_stmt_execute($stmt);
-
             if ($result) {
                 $last_postit_id = mysqli_insert_id($conn);
                 // vérifie si des utilisateurs ont été selectionnes pour le partage dans la variable $sharedUsers si c'est le cas 
@@ -126,12 +135,13 @@ function create_postit($title, $content, $sharedUsers) {
                             $error = mysqli_error($conn);
                             mysqli_stmt_close($stmt);
                             mysqli_close($conn);
-                            return "Erreur lors de la préparation de la requête d'insertion dans faits avec utilisateur partage: " . $error;
+                            return $error;
                         }
                     }
                     mysqli_close($conn);
                     return true;
                 }else{
+                    // si aucun utilisateur n'a été selectionné pour le partage on ajoute juste le post-it dans la table des faits
                     $last_postit_id = mysqli_insert_id($conn);
                     $sql_update_faits = "INSERT INTO faits (id_postit, id_utilisateur) VALUES (?, ?)";
                     $stmt_update_faits = mysqli_prepare($conn, $sql_update_faits);
@@ -146,22 +156,22 @@ function create_postit($title, $content, $sharedUsers) {
                         $error = mysqli_error($conn);
                         mysqli_stmt_close($stmt);
                         mysqli_close($conn);
-                        return "Erreur lors de la préparation de la requête de mise à jour des faits: " . $error;
+                        return $error;
                     }
                 }
             } else {
                 $error = mysqli_error($conn);
                 mysqli_stmt_close($stmt);
                 mysqli_close($conn);
-                return "Erreur lors de l'exécution de la requête d'insertion du post-it: " . $error;
+                return $error;
             }
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête d'insertion du post-it: " . $error;
+            return $error;
         }
     } else {
-        return "Erreur de connexion à la base de données";
+        return "Problème de connexion à la base de données";
     }
 }
 
@@ -211,6 +221,7 @@ function get_content($id) {
     }
 }
 
+// Fonction qui permet de mettre à jour un postit, on récupère les données title, content, sharedUser depuis l'interface de modification
 function update_postit($id, $title, $content) {
     $conn = db_connect();
     if ($conn) {
@@ -232,7 +243,7 @@ function update_postit($id, $title, $content) {
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête de mise à jour du post-it: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";
