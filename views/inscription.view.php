@@ -61,74 +61,75 @@
     </div>
     <!-- <script src="../public/js/verification.js"></script> -->
     <script>
-        $(document).ready(function{
-            $("#inscriptionForm").validate({
-                rules: {
-                    nom: {
-                        required: true,
-                    },
-                    prenom: {
-                        required: true,
-                    },
-                    pseudo: {
-                        required: true,
-                    },
-                    email: {
-                        required: true,
-                        email: true
-                    },
-                    date_naissance: {
-                        required: true,
-                        date: true
-                    },
-                    password: {
-                        required: true,
-                        minlength: 6
-                    },
-                    confirm_password: {
-                        required: true,
-                        equalTo: "#signup-password"
-                    },
-                },
-                    messages: {
-                        nom: "Veuillez entrer votre nom",
-                        prenom: "Veuillez entrer votre prénom",
-                        pseudo: {
-                            required: "Veuillez entrer votre pseudo",
-                            minlength: "Le pseudo doit contenir au moins 2 caractères"
-                        },
-                        email: {
-                            required: "Veuillez entrer votre email",
-                            email: "Veuillez entrer une adresse email valide"
-                        },
-                        date_naissance: {
-                            required: "Veuillez entrer votre date de naissance",
-                            date: "Veuillez entrer une date valide"
-                        },
-                        password: {
-                            required: "Veuillez entrer votre mot de passe",
-                            minlength: "Le mot de passe doit contenir au moins 6 caractères"
-                        },
-                        confirm_password: {
-                            required: "Veuillez confirmer votre mot de passe",
-                            equalTo: "Les mots de passe ne correspondent pas"
-                        },
-                },
-                //soumettre le formulaire seulement si il est valide
-                submitHandler: function(form) {
-                    form.submit();
-                },
-                $("#inscriptionForm").submit(function(event) {
-                    if (!$(this).valid()) {
-                        event.preventDefault(); 
-                    }
+        // $(document).ready(function{
+        //     $("#inscriptionForm").validate({
+        //         rules: {
+        //             nom: {
+        //                 required: true,
+        //             },
+        //             prenom: {
+        //                 required: true,
+        //             },
+        //             pseudo: {
+        //                 required: true,
+        //             },
+        //             email: {
+        //                 required: true,
+        //                 email: true
+        //             },
+        //             date_naissance: {
+        //                 required: true,
+        //                 date: true
+        //             },
+        //             password: {
+        //                 required: true,
+        //                 minlength: 6
+        //             },
+        //             confirm_password: {
+        //                 required: true,
+        //                 equalTo: "#signup-password"
+        //             },
+        //         },
+        //             messages: {
+        //                 nom: "Veuillez entrer votre nom",
+        //                 prenom: "Veuillez entrer votre prénom",
+        //                 pseudo: {
+        //                     required: "Veuillez entrer votre pseudo",
+        //                     minlength: "Le pseudo doit contenir au moins 2 caractères"
+        //                 },
+        //                 email: {
+        //                     required: "Veuillez entrer votre email",
+        //                     email: "Veuillez entrer une adresse email valide"
+        //                 },
+        //                 date_naissance: {
+        //                     required: "Veuillez entrer votre date de naissance",
+        //                     date: "Veuillez entrer une date valide"
+        //                 },
+        //                 password: {
+        //                     required: "Veuillez entrer votre mot de passe",
+        //                     minlength: "Le mot de passe doit contenir au moins 6 caractères"
+        //                 },
+        //                 confirm_password: {
+        //                     required: "Veuillez confirmer votre mot de passe",
+        //                     equalTo: "Les mots de passe ne correspondent pas"
+        //                 },
+        //         },
+        //         //soumettre le formulaire seulement si il est valide
+        //         submitHandler: function(form) {
+        //             form.submit();
+        //         },
+        //         $("#inscriptionForm").submit(function(event) {
+        //             if (!$(this).valid()) {
+        //                 event.preventDefault(); 
+        //             }
                 
-                });
-            });
-        });
+        //         });
+        //     });
+        // });
 
 
         function redirectToSignUp() {
+            console.log('redirectToSignUp');
             window.location.href = '?action=connexion';
         }
         function togglePassword(fieldId, icon) {

@@ -8,7 +8,7 @@ require_once __DIR__ . '/../config/database.php';
 function get_data($userid){
     $conn = db_connect();
     if ($conn) {
-        $sql = "SELECT DISTINCT titre, contenu, date_post, idpostit FROM faits, postit WHERE faits.id_utilisateur = ? AND faits.id_postit = postit.idpostit order by idpostit desc";
+        $sql = "SELECT titre, contenu, date_post, idpostit FROM faits, postit WHERE faits.id_utilisateur = ? AND faits.id_postit = postit.idpostit order by idpostit desc";
         $stmt = mysqli_prepare($conn, $sql);
         if($stmt){
             mysqli_stmt_bind_param($stmt, "i", $userid);
@@ -35,39 +35,6 @@ function get_data($userid){
         error_log("Erreur de connexion à la base de données");
         return "Erreur de connexion à la base de données";
     }
-}
-
-function get_partage($userid){
-    $conn = db_connect();
-    if ($conn) {
-        $sql = "SELECT titre, contenu, date_post, idpostit FROM faits, postit WHERE faits.id_utilisateur_partage = ? AND faits.id_postit = postit.idpostit order by idpostit desc";
-        $stmt = mysqli_prepare($conn, $sql);
-        if($stmt){
-            mysqli_stmt_bind_param($stmt, "i", $userid);
-            mysqli_stmt_execute($stmt);
-            $result = mysqli_stmt_get_result($stmt);
-            $datapart = [];
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $datapart[] = $row;
-                }
-            } else {
-                error_log("Aucun résultat trouvé pour l'utilisateur ID: $userid");
-            }
-            mysqli_stmt_close($stmt);
-            mysqli_close($conn);
-            return $datapart;
-        } else {
-            $error = mysqli_error($conn);
-            error_log("Erreur lors de la préparation de la requête: " . $error);
-            mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête";
-        }
-    } else {
-        error_log("Erreur de connexion à la base de données");
-        return "Erreur de connexion à la base de données";
-    }
-
 }
 
 function postit_id($positid){
@@ -285,7 +252,7 @@ function get_postit_details($id) {
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";
@@ -303,19 +270,18 @@ function delete_postit($id) {
             if ($result) {
                 mysqli_stmt_close($stmt);
                 mysqli_close($conn);
-                echo "çafonctionne jusqu'ici";
+                echo "ça fonctionne jusqu'ici";
                 return true;
             } else {
                 $error = mysqli_error($conn);
                 mysqli_stmt_close($stmt);
                 mysqli_close($conn);
-                echo "Requete pas prete";
                 return "Erreur " . $error;
             }
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête de suppression du post-it: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";

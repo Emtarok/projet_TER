@@ -19,9 +19,9 @@
 <?php
 $action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
-// if ($action !== 'connexion' && $action !== 'inscription') {
-//     require_once __DIR__ . '/config/session_check.php';
-// }
+if ($action !== 'connexion' && $action !== 'inscription') {
+    require_once __DIR__ . '/config/session_check.php';
+}
 
 switch ($action) {
     case 'connexion':
