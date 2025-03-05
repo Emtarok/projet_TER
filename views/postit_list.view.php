@@ -84,8 +84,8 @@ if (!isset($_SESSION)) {
                     <div class=\"postit-card card\">
                         <div class=\"card-body\">
                             <div>
-                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postitpart['idpostit']."\">".$postitpart['titre']." (".$postitpart['prenom']." ".$postitpart['nom'].")</a></h5>
-                                <small class=\"text-muted\">Publié le : ".$postitpart['date_post']."</small>
+                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postitpart['idpostit']."\">".$postitpart['titre']." (".$postitpart['prenom']."  ".$postitpart['nom'].")</a></h5>
+                                <small class=\"test-muted\">Publié le : ".$postitpart['date_post']."</small>
                             </div>
                         </div>
                     </div>";
