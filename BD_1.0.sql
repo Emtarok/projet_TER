@@ -16,7 +16,8 @@ CREATE TABLE postit (
     titre VARCHAR(200) NOT NULL,
     contenu TEXT NOT NULL,
     date_post DATETIME NOT NULL,
-    idutilisateur INT NOT NULL
+    idutilisateur INT NOT NULL,
+    FOREIGN KEY (idutilisateur) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE
 );
 
 CREATE TABLE faits (

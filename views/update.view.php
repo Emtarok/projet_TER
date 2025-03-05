@@ -88,6 +88,13 @@ $sharedUsers = get_shared_users($_GET['id']);
                         </div>
 
                         <input type="hidden" class="mb-4" id="utilisateurs_partages" name="utilisateurs_partages" value='<?php echo json_encode(array_column($sharedUsers, 'idutilisateur')); ?>'>
+                        <input type="hidden" id="utilisateurs_supprimes" name="utilisateurs_supprimes">
+                        
+                        <!-- Section pour afficher le contenu de utilisateurs_supprimes -->
+                        <div class="mt-2">
+                            <h5>Utilisateurs supprimés :</h5>
+                            <pre id="utilisateurs_supprimes_content"></pre>
+                        </div>
                         <!-- <p></p> -->
                         <button type="submit" class="btn btn-primary m-4">Modifier</button>
                     </form>
