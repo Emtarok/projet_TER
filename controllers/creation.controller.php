@@ -50,9 +50,20 @@ function handle_request() {
                 if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['content'])) {
                     $id = $_POST['id'];
                     $title = $_POST['title'];
-                    $content = $_POST['content'];
+                    $content = $_POST['content'];           
+                    $sharedUsers = isset($_POST['utilisateurs_partages']) ? json_decode($_POST['utilisateurs_partages'], true) : [];
+                    $removedUsers = isset($_POST['utilisateurs_supprimes']) ? json_decode($_POST['utilisateurs_supprimes'], true) : [];
                     $result = update_postit($id, $title, $content);
                     if ($result === true) {
+                        // Supprimer les utilisateurs partagés retirés
+                        if (!empty($removedUsers)) {
+                            $result_delete_faits = delete_shared_users($id, $removedUsers);
+                        }
+                        // Ajouter les nouveaux utilisateurs partagés
+                        if(!empty($sharedUsers)){
+                            $idUser = get_user_id_from_postit($id);
+                            $result_insert_faits = insert_shared_users($id, $idUser, $sharedUsers);
+                        }
                         header('Location: ?action=list');
                         exit();
                     } else {

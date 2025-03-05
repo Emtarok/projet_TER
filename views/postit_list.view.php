@@ -59,7 +59,7 @@ if (!isset($_SESSION)) {
                         <div class=\"card-body\">
                             <div>
                                 <h5 class=\"card-title\"><a href=\"?action=details&id=".$postit['idpostit']."\">".$postit['titre']."</a></h5>
-                                <small class=\"test-muted\">Publié le : ".$postit['date_post']."</small>
+                                <small class=\"text-muted\">Publié le : ".$postit['date_post']."</small>
                             </div>
                             <div class=\"options-container\">
                                 <button class=\"btn btn-light btn-sm\" onclick=\"redirectToDelete(".$postit['idpostit'].")\"><i class=\"fas fa-trash-alt\"></i></button>

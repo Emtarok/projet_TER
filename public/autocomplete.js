@@ -1,6 +1,11 @@
 $(document).ready(function () {
 
     let utilisateursSelectionnes = [];
+    let utilisateursSupprimes = [];
+
+    function updateDisplay() {
+        document.getElementById('utilisateurs_supprimes_content').innerText = JSON.stringify(utilisateursSupprimes, null, 2);
+    }
 
     // Auto-completion avec requête ajax
     $("#prenom_partage").on("input", function() {
@@ -49,13 +54,16 @@ $(document).ready(function () {
             $("#prenom_partage").val("");
             $("#suggestions").hide();
         }
+        updateDisplay()
     });
 
     // Suppression de l'utilisateur selectionne
     $(document).on("click", ".remove-user", function() {
         let idutilisateur = $(this).data("id");
         utilisateursSelectionnes = utilisateursSelectionnes.filter(user => user.idutilisateur !== idutilisateur);
+        utilisateursSupprimes.push(idutilisateur);
         $(this).parent().remove();
+        updateDisplay()
     });
 
     // permet de cacher les suggestions lorsqu'on clique en dehors de celle-ci
@@ -65,15 +73,22 @@ $(document).ready(function () {
         }
     });
 
-    // fonction permettant de récupérer l'id des utilisateurs selectionnés lors de la création d'un post-it (lors de la va)
-    function handleSharedUsers() {
+    // fonction permettant de récupérer l'id des utilisateurs selectionnés lors de la création d'un post-it
+    function SharedUsers() {
         const selectedUsers = utilisateursSelectionnes.map(user => user.idutilisateur); // Array to store selected user IDs
         document.getElementById('utilisateurs_partages').value = JSON.stringify(selectedUsers);
     }
 
+    // fonction permettant de récupérer l'id des utilisateurs supprimés lors de la modification d'un post-it
+    function RemoveSharedUsers() {
+        document.getElementById('utilisateurs_supprimes').value = JSON.stringify(utilisateursSupprimes);
+        updateDisplay();
+    }
+
     // Ajoutez un écouteur d'événement pour la soumission du formulaire
     $("#postitForm").on("submit", function(event) {
-        handleSharedUsers();
+        SharedUsers();
+        RemoveSharedUsers();
     });
 
 });

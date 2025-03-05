@@ -348,6 +348,92 @@ function get_shared_users($postit_id) {
     } else {
         return "Erreur de connexion à la base de données";
     }
+
+}
+// fonction qui permet d'ajouter les utilisateurs partagés dans la table des faits lors de la modification d'un post-it
+function insert_shared_users($id_postit, $id_utilisateur, $sharedUserIds) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "INSERT INTO faits (id_postit, id_utilisateur, id_utilisateur_partage) VALUES (?, ?, ?)";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            foreach ($sharedUserIds as $id_utilisateur_partage) {
+                mysqli_stmt_bind_param($stmt, "iii", $id_postit, $id_utilisateur, $id_utilisateur_partage);
+                $result = mysqli_stmt_execute($stmt);
+                if (!$result) {
+                    $error = mysqli_error($conn);
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($conn);
+                    return "Erreur lors de l'exécution de la requête d'insertion dans faits pour l'utilisateur partagé ID: $id_utilisateur_partage. Erreur: " . $error;
+                }
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            return true;
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête d'insertion dans faits: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
+}
+// fonction qui permet de recuperer l'id de l'utilisateur du créateur du postità partir de l'id de l'un de ses postits
+function get_user_id_from_postit($id_postit){
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "SELECT id_utilisateur FROM faits WHERE id_postit = ? LIMIT 1";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $id_postit);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $id_utilisateur = null;
+            if ($result && mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_assoc($result);
+                $id_utilisateur = $row['id_utilisateur'];
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            return $id_utilisateur;
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
 }
 
+// fonction permettant de supprimer un enregistrement de la table des faits en fonction de l'id_postit et l'id_utilisateur_partage (lors de la modification d'un post-it)
+function delete_shared_users($id_postit, $sharedUserIds) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "DELETE FROM faits WHERE id_postit = ? AND id_utilisateur_partage = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            foreach ($sharedUserIds as $id_utilisateur_partage) {
+                mysqli_stmt_bind_param($stmt, "ii", $id_postit, $id_utilisateur_partage);
+                $result = mysqli_stmt_execute($stmt);
+                if (!$result) {
+                    $error = mysqli_error($conn);
+                    mysqli_stmt_close($stmt);
+                    mysqli_close($conn);
+                    return "Erreur lors de l'exécution de la requête de suppression dans faits pour l'utilisateur partagé ID: $id_utilisateur_partage. Erreur: " . $error;
+                }
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            return true;
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête de suppression dans faits: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
+}
 ?>
