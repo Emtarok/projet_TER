@@ -278,12 +278,18 @@ body {
     resize: none;
 }
 
+<<<<<<< HEAD
+.input-error {
+    border: 2px solid red;
+    background-color: #ffcccc;
+=======
 /* css pour la croix rouge de suppresion des utilisateurs selectionnes dans l'autocompletion*/
 
 .croix {
     color: #1c87c9;
     text-shadow: 2px 2px 4px #00ffff;
     font-size: 30px;
+>>>>>>> f8c96c1125959048f5b8a544577af6e071bc788d
 }
 
 .error-message {

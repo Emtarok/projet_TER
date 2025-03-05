@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./public/css/style.css">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
@@ -18,36 +19,44 @@
         <div class="container">
             <div class="card w-100" id="card">
             <div class="error-message" id="msg-form"></div>
+            <div class="error-message" id="msg-form"></div>
                 <div class="card__face card__face--back">
                     <h2>Inscription</h2>
-                    <form id="inscriptionForm" action="?action=inscription" method="POST" onsubmit="return validateForm()">
+                    <form id="inscriptionForm" action="?action=inscription" method="POST">
                         <div class="form-group">
                             <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
-                            <div class="error-message" id="msg-nom"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
-                            <div class="error-message" id="msg-pr"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
+                            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
                         </div>
                         <div class="form-group">
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
+                            <div class="error-message" id="msg-email"></div>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Email">
                             <div class="error-message" id="msg-email"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control"id="date_naissance" name="date_naissance" placeholder="YYYY-MM-DD">
                             <div class="error-message" id="msg-date"></div>
+                            <input type="text" class="form-control"id="date_naissance" name="date_naissance" placeholder="YYYY-MM-DD">
+                            <div class="error-message" id="msg-date"></div>
                         </div>
+                        <div class="form-group" id="msg-password1">
                         <div class="form-group" id="msg-password1">
                             <input type="password" class="form-control" id="signup-password" name="password" placeholder="Mot de passe">
                             <i class="fas fa-eye password-toggle" onclick="togglePassword('signup-password', this)"></i>
                             <div class="error-message" id="msg-password1"></div>
+                            <div class="error-message" id="msg-password1"></div>
                         </div>
+                        <div class="form-group" id="msg-password2">
                         <div class="form-group" id="msg-password2">
                             <input type="password" class="form-control" id="signup-confirm-password" name="confirm_password" placeholder="Confirmation de mot de passe">
                             <i class="fas fa-eye password-toggle" onclick="togglePassword('signup-confirm-password', this)"></i>
+                            <div class="error-message" id="msg-password2"></div>
                             <div class="error-message" id="msg-password2"></div>
                         </div>
                         <div class="form-group">
@@ -59,22 +68,8 @@
             </div>
         </div>
     </div>
+    <!-- <script src="../public/js/verification.js"></script> -->
     <script>
-        function redirectToSignIn() {
-            window.location.href = '?action=connexion';
-        }
-        function togglePassword(fieldId, icon) {
-            const field = document.getElementById(fieldId);
-            if (field.type === "password") {
-                field.type = "text";
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                field.type = "password";
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
         $(document).ready(function{
             $("#inscriptionForm").validate({
                 rules: {
@@ -140,6 +135,24 @@
                 });
             });
         });
+
+
+        function redirectToSignUp() {
+            window.location.href = '?action=connexion';
+        }
+        function togglePassword(fieldId, icon) {
+            const field = document.getElementById(fieldId);
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
     </script>
 </body>
 </html>
