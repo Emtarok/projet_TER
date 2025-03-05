@@ -3,6 +3,7 @@ $(document).ready(function () {
     let utilisateursSelectionnes = [];
 
     // Auto-completion
+    // On utilise une requête AJAX pour récupérer les suggestions de prénoms en fonction du terme (ce que l'on rentre dans la barre de recherche)
     $("#prenom_partage").on("input", function() {
         let terme = $(this).val();
         console.log("Input event triggered, terme: " + terme);
@@ -15,7 +16,7 @@ $(document).ready(function () {
             success : function(data){
                 console.log("AJAX request successful, raw data: " + data);
                 try{
-                    if (Array.isArray(data)) {
+                    if (Array.isArray(data)) { // vérification du type renvoyé par le serveur
                         let suggestionsHTML = "";
                         data.forEach(prenom => {
                             suggestionsHTML += `<li class="list-group-item suggestion">${prenom}</li>`;
@@ -29,7 +30,7 @@ $(document).ready(function () {
                 console.error("Response data: " + data);
             }
         },
-            error: function(xhr, status, error) {
+            error: function(xhr, status, error) { // lorsque la requête ajax échoue cela lance la fonction suivante
                 console.error("AJAX request failed, status: " + status + ", error: " + error);
                 console.error("Response text: " + xhr.responseText);
                 console.log(xhr, status, error);
@@ -41,6 +42,7 @@ $(document).ready(function () {
     });
 
     // Ajout de l'utilisateur sélectionné
+    // On affiche les utilisateurs sélectionnés depuis la barre de recherche dans la zone "utilisateurs sélectionnés"
     $(document).on("click", ".suggestion", function() {
         let prenom = $(this).text();
         if (!utilisateursSelectionnes.includes(prenom)) {
@@ -52,6 +54,7 @@ $(document).ready(function () {
     });
 
     // Suppression de l'utilisateur selectionne
+    // Lors du click sur la croix on supprime l'utilisateur de la liste des utilisateurs sélectionnés
     $(document).on("click", ".remove-user", function() {
         let prenom = $(this).data("user");
         utilisateursSelectionnes = utilisateursSelectionnes.filter(user => user !== prenom);
