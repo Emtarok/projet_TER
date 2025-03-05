@@ -31,32 +31,23 @@
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
-                            <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Email">
-                            <div class="error-message" id="msg-email"></div>
                             <input type="text" class="form-control" id="email" name="email" placeholder="Email">
                             <div class="error-message" id="msg-email"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control"id="date_naissance" name="date_naissance" placeholder="YYYY-MM-DD">
                             <div class="error-message" id="msg-date"></div>
-                            <input type="text" class="form-control"id="date_naissance" name="date_naissance" placeholder="YYYY-MM-DD">
-                            <div class="error-message" id="msg-date"></div>
                         </div>
-                        <div class="form-group" id="msg-password1">
                         <div class="form-group" id="msg-password1">
                             <input type="password" class="form-control" id="signup-password" name="password" placeholder="Mot de passe">
                             <i class="fas fa-eye password-toggle" onclick="togglePassword('signup-password', this)"></i>
                             <div class="error-message" id="msg-password1"></div>
-                            <div class="error-message" id="msg-password1"></div>
                         </div>
-                        <div class="form-group" id="msg-password2">
                         <div class="form-group" id="msg-password2">
                             <input type="password" class="form-control" id="signup-confirm-password" name="confirm_password" placeholder="Confirmation de mot de passe">
                             <i class="fas fa-eye password-toggle" onclick="togglePassword('signup-confirm-password', this)"></i>
-                            <div class="error-message" id="msg-password2"></div>
                             <div class="error-message" id="msg-password2"></div>
                         </div>
                         <div class="form-group">

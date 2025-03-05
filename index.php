@@ -56,6 +56,10 @@ switch ($action) {
         require_once __DIR__ . '/controllers/creation.controller.php';
         break;
 
+    case 'update_profile':
+        require_once __DIR__ . '/controllers/profil.controller.php';
+        break;
+
     case 'delete':
         require_once __DIR__ . '/controllers/creation.controller.php';
         break;

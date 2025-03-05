@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../models/inscription.model.php';
 
 function handle_request() {
+    // ...code pour gérer l'action inscription...
     if(!isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['date_naissance'], $_POST['pseudo'], $_POST['password'])){
         echo "Veuillez remplir tous les champs";
         require_once __DIR__ . '/../views/inscription.view.php';
@@ -19,12 +20,10 @@ function handle_request() {
         $response = set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password_h);
         if($response['success']){
             echo $response['message'];
-            header('Location: index.php?action=connexion');
             require_once __DIR__ . '/../views/connexion.view.php';
             exit();
         }else{
             echo $response['message'];
-            header('Location: index.php?action=inscription');
             require_once __DIR__ . '/../views/inscription.view.php';
             exit();
         }
