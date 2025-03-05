@@ -11,19 +11,20 @@ function handle_request() {
                 if (isset($_POST['email']) && isset($_POST['password'])) {
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    // Récupérer les données de la base de données
+                    // récupére les données de l'utilisateur
                     $user = get_data($email);
                     
-                    // Vérifier si $user est un tableau et contient les clés attendues
+                    // vérifie si $user est un tableau et contient les clés attendues
                     if ($user !== null && is_array($user) && isset($user['email'])) {
-                        // Vérification du mot de passe
+                        // vérification du mot de passe
                         if (password_verify($password, $user['motdepasse'])) {
+                            //démarragr de la session
                             session_start();
                             $_SESSION['user_id'] = $user['idutilisateur'];
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['pseudo'] = $user['pseudo'];
                             // echo "Connexion réussie";
-                            // Envoyer l'utilisateur à la page postit_list
+                            // envoyer l'utilisateur à la page postit_list
                             header('Location: index.php?action=list');
                             exit();
                         } else {
@@ -45,7 +46,7 @@ function handle_request() {
             break;
 
         case 'inscription':
-            // ...code pour gérer l'action inscription...
+            // code pour gérer l'action inscription
             if (!isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['date_naissance'], $_POST['pseudo'], $_POST['password'])) {
                 echo "Veuillez remplir tous les champs";
                 require_once __DIR__ . '/../views/inscription.view.php';
