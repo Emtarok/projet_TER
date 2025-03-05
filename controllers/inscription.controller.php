@@ -15,9 +15,15 @@ function handle_request() {
         $date_naissance = $_POST['date_naissance'];
         $pseudo = $_POST['pseudo'];
         $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
-        if($password != $confirm_password){
-            echo "Les mots de passe ne correspondent pas";
+        //$confirm_password = $_POST['confirm_password'];
+        $password_h = password_hash($password, PASSWORD_DEFAULT);
+        $response = set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password_h);
+        if($response['success']){
+            echo $response['message'];
+            require_once __DIR__ . '/../views/connexion.view.php';
+            exit();
+        }else{
+            echo $response['message'];
             require_once __DIR__ . '/../views/inscription.view.php';
             exit();
         }

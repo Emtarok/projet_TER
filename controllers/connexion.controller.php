@@ -13,9 +13,10 @@ function handle_request() {
                     $password = $_POST['password'];
                     //recuperer a travers get_data() les données de la base de données
                     $user = get_data($email);
+                    echo $user['email'];
                     if ($user !== null) {
                         //vérification du mot de passe
-                        if ($password == $user['motdepasse']) {
+                        if (password_verify($password, $user['motdepasse'])) {
                             session_start();
                             $_SESSION['user_id'] = $user['idutilisateur'];
                             $_SESSION['email'] = $user['email'];
@@ -29,7 +30,7 @@ function handle_request() {
                         }
                     }else{
                         echo "Email incorrect";
-                        // require_once __DIR__ . '/../views/connexion.view.php';
+                        require_once __DIR__ . '/../views/connexion.view.php';
                     }
                 }else{
                     echo "Veuillez remplir tous les champs";

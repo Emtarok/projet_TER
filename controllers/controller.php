@@ -12,6 +12,7 @@ function handle_request() {
 
         default:
             echo "Page non trouvée.";
+            break;
     }
 }
 ?>
