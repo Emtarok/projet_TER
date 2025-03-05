@@ -14,6 +14,7 @@ function handle_request() {
         }
         $userid = $_SESSION['user_id'];
         $data = get_data($userid);
+        $datapart = get_partage($userid);
         // si récupération du numéro de session en cours non nul (utilisateur connecté) -> OK
         // je ne vérifie pas si utilisateur dans la bdd, car déjà fait lors de la connexion.
         require_once __DIR__ . '/../views/postit_list.view.php';

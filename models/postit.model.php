@@ -37,6 +37,39 @@ function get_data($userid){
     }
 }
 
+function get_partage($userid){
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "SELECT titre, contenu, date_post, idpostit FROM faits, postit WHERE faits.id_utilisateur_partage = ? AND faits.id_postit = postit.idpostit order by idpostit desc";
+        $stmt = mysqli_prepare($conn, $sql);
+        if($stmt){
+            mysqli_stmt_bind_param($stmt, "i", $userid);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $datapart = [];
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $datapart[] = $row;
+                }
+            } else {
+                error_log("Aucun résultat trouvé pour l'utilisateur ID: $userid");
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            return $datapart;
+        } else {
+            $error = mysqli_error($conn);
+            error_log("Erreur lors de la préparation de la requête: " . $error);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête";
+        }
+    } else {
+        error_log("Erreur de connexion à la base de données");
+        return "Erreur de connexion à la base de données";
+    }
+
+}
+
 function postit_id($positid){
     $conn = db_connect();
     if ($conn) {
