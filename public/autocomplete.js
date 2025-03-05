@@ -5,7 +5,7 @@ $(document).ready(function () {
     // Fonction pour mettre à jour l'affichage des tableaux
     function updateDisplay() {
         document.getElementById('utilisateursSelectionnesContent').innerText = JSON.stringify(utilisateursSelectionnes, null, 2);
-        const selectedUsers = utilisateursSelectionnes.map(user => user.id);
+        const selectedUsers = utilisateursSelectionnes.map(user => user.idutilisateur);
         document.getElementById('selectedUsersContent').innerText = JSON.stringify(selectedUsers, null, 2);
     }
 
@@ -25,7 +25,7 @@ $(document).ready(function () {
                         if (Array.isArray(data)) { // vérification du type renvoyé par le serveur
                             let suggestionsHTML = "";
                             data.forEach(user => {
-                                suggestionsHTML += `<li class="list-group-item suggestion" data-id="${user.id}">${user.prenom}</li>`;
+                                suggestionsHTML += `<li class="list-group-item suggestion" data-id="${user.idutilisateur}">${user.prenom}</li>`;
                             });
                             $("#suggestions").html(suggestionsHTML).show();
                         } else {
@@ -49,10 +49,10 @@ $(document).ready(function () {
     // Ajout de l'utilisateur sélectionné
     $(document).on("click", ".suggestion", function() {
         let prenom = $(this).text();
-        let id = $(this).data("id");
-        if (!utilisateursSelectionnes.some(user => user.id === id)) {
-            utilisateursSelectionnes.push({ id: id, prenom: prenom });
-            $("#utilisateurs_selectionnes").append(`<span class="badge bg-primary m-1 p-2">${prenom} <i class="croix fas fa-times remove-user" data-id="${id}"></i></span>`);
+        let idutilisateur = $(this).data("id");
+        if (!utilisateursSelectionnes.some(user => user.idutilisateur === idutilisateur)) {
+            utilisateursSelectionnes.push({ idutilisateur: idutilisateur, prenom: prenom });
+            $("#utilisateurs_selectionnes").append(`<span class="badge bg-primary m-1 p-2">${prenom} <i class="croix fas fa-times remove-user" data-id="${idutilisateur}"></i></span>`);
             $("#prenom_partage").val("");
             $("#suggestions").hide();
         }
@@ -61,8 +61,8 @@ $(document).ready(function () {
 
     // Suppression de l'utilisateur selectionne
     $(document).on("click", ".remove-user", function() {
-        let id = $(this).data("id");
-        utilisateursSelectionnes = utilisateursSelectionnes.filter(user => user.id !== id);
+        let idutilisateur = $(this).data("id");
+        utilisateursSelectionnes = utilisateursSelectionnes.filter(user => user.idutilisateur !== idutilisateur);
         $(this).parent().remove();
         updateDisplay();
     });
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
     // fonction permettant de récupérer l'id des utilisateurs selectionnés lors de la création d'un post-it (lors de la va)
     function handleSharedUsers() {
-        const selectedUsers = utilisateursSelectionnes.map(user => user.id); // Array to store selected user IDs
+        const selectedUsers = utilisateursSelectionnes.map(user => user.idutilisateur); // Array to store selected user IDs
         document.getElementById('utilisateurs_partages').value = JSON.stringify(selectedUsers);
         updateDisplay();
     }
