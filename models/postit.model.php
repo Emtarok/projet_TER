@@ -8,7 +8,7 @@ require_once __DIR__ . '/../config/database.php';
 function get_data($userid){
     $conn = db_connect();
     if ($conn) {
-        $sql = "SELECT titre, contenu, date_post, idpostit FROM faits, postit WHERE faits.id_utilisateur = ? AND faits.id_postit = postit.idpostit order by idpostit desc";
+        $sql = "SELECT DISTINCT titre, contenu, date_post, idpostit FROM faits, postit WHERE idutilisateur = ? order by idpostit desc";
         $stmt = mysqli_prepare($conn, $sql);
         if($stmt){
             mysqli_stmt_bind_param($stmt, "i", $userid);
