@@ -16,7 +16,8 @@ CREATE TABLE postit (
     titre VARCHAR(200) NOT NULL,
     contenu TEXT NOT NULL,
     date_post DATETIME NOT NULL,
-    idutilisateur INT NOT NULL
+    idutilisateur INT NOT NULL,
+    FOREIGN KEY (idutilisateur) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE
 );
 
 CREATE TABLE faits (
@@ -29,8 +30,3 @@ CREATE TABLE faits (
     FOREIGN KEY (id_utilisateur_partage) REFERENCES utilisateurs(idutilisateur) ON DELETE CASCADE,
     UNIQUE (id_postit, id_utilisateur_partage)
 );
-
-ALTER TABLE postit
-ADD CONSTRAINT FK_postit_utilisateur
-FOREIGN KEY (idutilisateur) REFERENCES faits(id_utilisateur)
-ON DELETE CASCADE;

@@ -294,16 +294,16 @@ function get_postit_details($id) {
 
 function delete_postit($id) {
     $conn = db_connect();
+    $user = $_SESSION['user_id'];
     if ($conn) {
-        $sql = "DELETE FROM postit WHERE idpostit = ?";
+        $sql = "DELETE FROM postit WHERE idpostit = ? AND idutilisateur = ?";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
-            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_bind_param($stmt, "ii", $id, $user);
             $result = mysqli_stmt_execute($stmt);
             if ($result) {
                 mysqli_stmt_close($stmt);
                 mysqli_close($conn);
-                echo "ça fonctionne jusqu'ici";
                 return true;
             } else {
                 $error = mysqli_error($conn);
@@ -314,12 +314,13 @@ function delete_postit($id) {
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return $error;
+            return "Erreur lors de la préparation de la requête de suppression du post-it: " . $error;
         }
     } else {
         return "Erreur de connexion à la base de données";
     }
 }
+
 // fonction qui recupere les prenoms des utilisateurs avec qui le postit est partagé
 function get_shared_users($postit_id) {
     $conn = db_connect();
