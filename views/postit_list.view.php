@@ -76,11 +76,24 @@ if (!isset($_SESSION)) {
                     <h5 class="card-title-h5">Postit partagé pour vous</h5>
                     <div></div>
                 </div>
-                <div class="postit-card card">
-                    <div class="card-body">
-                        <a href="#" class="card-title">Post partagé pour vous</a>
-                    </div>
-                </div>
+                <?php
+                if (!empty($datapart)) {
+                    echo $_SESSION['message'] ?? '';
+                    foreach ($datapart as $postitpart){
+                    echo "
+                    <div class=\"postit-card card\">
+                        <div class=\"card-body\">
+                            <div>
+                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postitpart['idpostit']."\">".$postitpart['titre']." (".$postitpart['prenom']."  ".$postitpart['nom']")"</a></h5>
+                                <small class=\"test-muted\">Publié le : ".$postitpart['date_post']."</small>
+                            </div>
+                        </div>
+                    </div>";
+                    }
+                } else {
+                    echo "<p>Aucun post-it trouvé</p>";
+                }
+                ?>
             </div>
         </div>
     </div>
