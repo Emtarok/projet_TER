@@ -64,6 +64,12 @@
          $(document).ready(function (){
             $("#inscriptionForm").validate({
                 errorClass: "error-message",
+                highlight: function(element) {
+                    $(element).addClass("error"); 
+                },
+                unhighlight: function(element) {
+                    $(element).removeClass("error");
+                },
                 rules: {
                     nom: {
                         required: true,
