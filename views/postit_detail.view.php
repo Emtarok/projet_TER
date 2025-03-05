@@ -53,6 +53,14 @@ if (!isset($_SESSION)) {
                                 <p class=\"card-text\">".$postit['contenu']."</p>
                                 <small class=\"text-muted\">Publié le: ".$postit['date_post']."</small>
                             </div>
+                            <div class=\"shared-users\">
+                                <h6>Partagé avec :</h6>
+                                <ul>";
+                                foreach ($sharedUsers as $user) {
+                                    echo "<li>".$user['prenom']."</li>";
+                                }
+                                echo "</ul>
+                            </div>
                             <div class=\"options-container\">
                                 <button class=\"btn btn-light btn-sm\" onclick=\"redirectTo(".$postit['idpostit'].")\"><i class=\"fas fa-ellipsis-h\"></i></button>
                                 <div class=\"options-menu\">

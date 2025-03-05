@@ -288,4 +288,33 @@ function delete_postit($id) {
         return "Erreur de connexion à la base de données";
     }
 }
+// fonction qui recupere les prenoms des utilisateurs avec qui le postit est partagé
+function get_shared_users($postit_id) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "SELECT utilisateurs.idutilisateur, utilisateurs.prenom FROM faits JOIN utilisateurs ON faits.id_utilisateur_partage = utilisateurs.idutilisateur WHERE faits.id_postit = ? and id_utilisateur_partage IS NOT NULL";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $postit_id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $sharedUsers = [];
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $sharedUsers[] = $row;
+                }
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            return $sharedUsers;
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
+}
+
 ?>
