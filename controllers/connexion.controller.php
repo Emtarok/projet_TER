@@ -1,9 +1,10 @@
 <?php
 // Inclure le modèle pour accéder aux données
 require_once __DIR__ . '/../models/connexion.model.php';
+require_once __DIR__ . '/../models/inscription.model.php';
 
 function handle_request() {
-    $action = isset($_GET['action']) ? $_GET['action'] : 'home';
+    $action = isset($_GET['action']) ? $_GET['action'] : 'connexion';
     switch ($action) {
         case 'connexion':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -23,10 +24,23 @@ function handle_request() {
                             $_SESSION['pseudo'] = $user['pseudo'];
                             echo "Connexion réussie";
                             //envoyer l'utilisateur à la page postit_list
+                            header('Location: index.php?action=list');
+                            require_once __DIR__ . '/../views/postit_list.view.php';
+                            exit();
+                        /*
+                        if (password_verify($password, $user['motdepasse'])) {
+                            session_start();
+                            $_SESSION['user_id'] = $user['idutilisateur'];
+                            $_SESSION['email'] = $user['email'];
+                            $_SESSION['pseudo'] = $user['pseudo'];
+                            echo "Connexion réussie";
+                            //envoyer l'utilisateur à la page postit_list
+                            header('Location: index.php?action=list');
                             require_once __DIR__ . '/../views/postit_list.view.php';
                             exit();
                         }else{
                             echo "Mot de passe incorrect";
+                            require_once __DIR__ . '/../views/connexion.view.php';
                         }
                     }else{
                         echo "Email incorrect";
@@ -34,22 +48,54 @@ function handle_request() {
                     }
                 }else{
                     echo "Veuillez remplir tous les champs";
+                    require_once __DIR__ . '/../views/connexion.view.php';
                 }
             }else{
                 echo "Méthode non autorisée";
                 require_once __DIR__ . '/../views/connexion.view.php';
             }
             break; 
-
-        case "deconnexion":
+        
+        case 'inscription':
+            // ...code pour gérer l'action inscription...
+            if(!isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['date_naissance'], $_POST['pseudo'], $_POST['password'])){
+                echo "Veuillez remplir tous les champs";
+                require_once __DIR__ . '/../views/inscription.view.php';
+                exit();
+            }else{
+                $nom = $_POST['nom'];
+                $prenom = $_POST['prenom'];
+                $email = $_POST['email'];
+                $date_naissance = $_POST['date_naissance'];
+                $pseudo = $_POST['pseudo'];
+                $password = $_POST['password'];
+                //$confirm_password = $_POST['confirm_password'];
+                $password_h = password_hash($password, PASSWORD_DEFAULT);
+                $response = set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password_h);
+                if($response['success']){
+                    echo $response['message'];
+                    require_once __DIR__ . '/../views/connexion.view.php';
+                    exit();
+                }else{
+                    echo $response['message'];
+                    require_once __DIR__ . '/../views/inscription.view.php';
+                    exit();
+                }
+            }
+            break;
+        
+        case 'deconnexion':
+            // ...code pour gérer l'action deconnexion...
             session_start();
+            session_unset();
             session_destroy();
-            header('Location: index.php');
-            require_once __DIR__ . '/../views/connexion.view.php';
+            header('Location: index.php?action=connexion');
+            exit();
             break;
 
         default:
             echo "Page non trouvée.";
+            break;
     }
 }
 ?>

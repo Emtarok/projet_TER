@@ -33,13 +33,13 @@ if (!isset($_SESSION)) {
                     <a class="nav-link" href="?action=list">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profil</a>
+                    <a class="nav-link" href="?action=profil">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="?action=contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Déconnexion</a>
                 </li>
             </ul>
         </div>
@@ -49,14 +49,16 @@ if (!isset($_SESSION)) {
             <div class="postit-form card">
                 <div class="card-body">
                     <h2>Créer un post</h2>
-                    <form action="?action=create_postit" method="POST">
+                    <form id="postitForm" action="?action=create_postit" method="POST" onsubmit="return validateForm()">
                         <div class="form-group">
                             <label for="title">Titre:</label>
-                            <input type="text" class="form-control" id="title" name="title" required>
+                            <input type="text" class="form-control" id="title" name="title">
+                            <div id="titleError" class="error-message"></div>
                         </div>
                         <div class="form-group">
                             <label for="content">Contenu:</label>
-                            <textarea class="form-control" id="content" rows="3" name="content" required></textarea>
+                            <textarea class="form-control" id="content" rows="3" name="content"></textarea>
+                            <div id="contentError" class="error-message"></div>
                         </div>
 
                         <!-- Zone de Partage des post-its avec suggestions dynamiques -->
@@ -75,9 +77,47 @@ if (!isset($_SESSION)) {
 
                          <button type="submit" class="btn btn-primary">Créer</button>
                     </form>
+
+                    <!-- Affichage du contenu des tableaux pour vérification -->
+                    <div class="mt-4">
+                        <h5>Contenu du tableau utilisateursSelectionnes :</h5>
+                        <pre id="utilisateursSelectionnesContent"></pre>
+                    </div>
+                    <div class="mt-4">
+                        <h5>Contenu du tableau selectedUsers :</h5>
+                        <pre id="selectedUsersContent"></pre>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function validateForm() {
+            let isValid = true;
+
+            // Modifier le DOM en effacant le message precedent
+            document.getElementById('titleError').innerText = '';
+            document.getElementById('contentError').innerText = '';
+
+            // Verifier le titre
+            const title = document.getElementById('title').value;
+            if (title.trim() === '') {
+                document.getElementById('titleError').innerText = 'Le titre est requis.';
+                isValid = false;
+            } else if (title.length > 150) {
+                document.getElementById('titleError').innerText = 'Le titre ne doit pas dépasser 150 caractères.';
+                isValid = false;
+            }
+
+            // Valider le contenu
+            const content = document.getElementById('content').value;
+            if (content.trim() === '') {
+                document.getElementById('contentError').innerText = 'Le contenu est requis.';
+                isValid = false;
+            }
+
+            return isValid;
+        }
+    </script>
 </body>
 </html>

@@ -15,7 +15,16 @@ function handle_request() {
                 if (isset($_POST['title']) && isset($_POST['content'])) {
                     $title = $_POST['title'];
                     $content = $_POST['content'];
-                    $result = create_postit($title, $content);
+                    // si il y a des utilisateurs qui sont selectionnes ils sont rajouté dans sharedUsers
+                    $sharedUsers = isset($_POST['utilisateurs_partages']) ? json_decode($_POST['utilisateurs_partages'], true) : [];
+                    
+                    // code pour tester si les id des utilisateurs selectionnes sont bien récupérés
+                    /*// Envoyer une réponse JSON contenant le contenu de sharedUsers
+                    header('Content-Type: application/json');
+                    echo json_encode(['sharedUsers' => $sharedUsers]);
+                    exit();*/
+
+                    $result = create_postit($title, $content, $sharedUsers);
                     if ($result === true) {
                         header('Location: ?action=list');
                         exit();
@@ -28,16 +37,19 @@ function handle_request() {
             }
             require_once __DIR__ . '/../views/postit_list.view.php';
             break;
-        /* Je voulais appelé la requête ajax en utilisant ce switch case pour utiliser le même controller mais j'ai une erreur oû de parse (le json est soit vide soit ce n'est pas un json)
-        case 'autocomplete':
-            $prenoms = get_utilisateurs_prenoms($_GET['terme']);
-            header('Content-Type: application/json');
-            echo json_encode($prenoms);
-            break;
-        */
 
         case 'update':
-            require_once __DIR__ . '/../views/update.view.php';
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $postit = get_postit_details($id);
+                if ($postit) {
+                    require_once __DIR__ . '/../views/update.view.php';
+                } else {
+                    echo "Post-it non trouvé";
+                }
+            } else {
+                echo "ID du post-it manquant";
+            }
             break;
         
         case 'update_postit':
@@ -58,6 +70,21 @@ function handle_request() {
                 }
             }
             require_once __DIR__ . '/../views/update.view.php';
+            break;
+
+        case 'delete':
+            if (isset($_GET['id'])) {
+                $id = $_GET['id'];
+                $result = delete_postit($id);
+                if ($result === true) {
+                    header('Location: ?action=list');
+                    exit();
+                } else {
+                    echo $result;
+                }
+            } else {
+                echo "ID du post-it manquant";
+            }
             break;
 
         default:

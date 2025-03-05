@@ -23,12 +23,12 @@ function handle_request() {
                 }
             } else {
                 echo "ID de postit vide";
-                echo "ID de postit vide";
             }
             break;
         
         default:
-            echo "Page non trouvée.";
+            require_once __DIR__ . '/controllers/controller.php';
+            break;
     }
 }
 ?>

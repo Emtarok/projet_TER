@@ -30,13 +30,13 @@ if (!isset($_SESSION)) {
                     <a class="nav-link" href="?action=list">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profil</a>
+                    <a class="nav-link" href="?action=profil">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="?action=contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Déconnexion</a>
                 </li>
             </ul>
         </div>
@@ -52,13 +52,13 @@ if (!isset($_SESSION)) {
                 <!-- structure d'un postit. -->
                 <?php
                 if (!empty($data)) {
+                    echo $_SESSION['message'] ?? '';
                     foreach ($data as $postit){
                     echo "
                     <div class=\"postit-card card\">
                         <div class=\"card-body\">
                             <div>
                                 <h5 class=\"card-title\"><a href=\"?action=details&id=".$postit['idpostit']."\">".$postit['titre']."</a></h5>
-                                <p>".$postit['contenu']."</p>
                                 <small class=\"test-muted\">Publié le : ".$postit['date_post']."</small>
                             </div>
                         </div>

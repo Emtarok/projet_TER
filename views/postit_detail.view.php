@@ -26,16 +26,16 @@ if (!isset($_SESSION)) {
                     </form>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/postit.html">Accueil</a>
+                    <a class="nav-link" href="?action=list">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="profile.html">Profil</a>
+                    <a class="nav-link" href="?action=profil">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="nav-link" href="?action=contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="?action=deconnexion">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Déconnexion</a>
                 </li>
             </ul>
         </div>
@@ -45,19 +45,19 @@ if (!isset($_SESSION)) {
             <div class="postit-card card">
             <!-- // affichage du postit sélectionné -->
                 <?php
-                    foreach ($postitdetail as $postitdetail){
+                    foreach ($postitdetail as $postit){
                         echo "
                         <div class=\"card-body\">
                             <div>
-                                <h5 class=\"card-title\">".$postitdetail['titre']."</h5>
-                                <p class=\"card-text\">".$postitdetail['contenu']."</p>
-                                <small class=\"text-muted\">Publié le: ".$postitdetail['date_post']."</small>
+                                <h5 class=\"card-title\">".$postit['titre']."</h5>
+                                <p class=\"card-text\">".$postit['contenu']."</p>
+                                <small class=\"text-muted\">Publié le: ".$postit['date_post']."</small>
                             </div>
                             <div class=\"options-container\">
-                                <button class=\"btn btn-light btn-sm\"><i class=\"fas fa-ellipsis-h\"></i></button>
+                                <button class=\"btn btn-light btn-sm\" onclick=\"redirectTo(".$postit['idpostit'].")\"><i class=\"fas fa-ellipsis-h\"></i></button>
                                 <div class=\"options-menu\">
-                                    <button onclick=\"redirectTo(this)\">Modifier</button>
-                                    <button>Supprimer</button>
+                                    <button onclick=\"redirectTo(".$postit['idpostit'].")\">Modifier</button>
+                                    <button onclick=\"redirectToDelete(".$postit['idpostit'].")\">Supprimer</button>
                                 </div>
                             </div>
                         </div>";
@@ -92,8 +92,11 @@ if (!isset($_SESSION)) {
             commentSection.style.marginLeft = '10px';
             commentSection.style.marginBottom = '10px';
         }
-        function redirectTo(button) {
-            window.location.href = '?action=update';
+        function redirectTo(id) {
+            window.location.href = '?action=update&id=' + id;
+        }
+        function redirectToDelete(id) {
+            window.location.href = '?action=delete&id=' + id;
         }
     </script>
 </body>

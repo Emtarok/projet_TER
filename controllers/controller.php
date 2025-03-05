@@ -9,6 +9,10 @@ function handle_request() {
         case 'home':
             require_once __DIR__ . '/../views/connexion.view.php';
             break;
+        
+        case 'list':
+            require_once __DIR__ . '/../views/postit_list.view.php';
+            break;  
 
         case 'connexion':
             require_once __DIR__ . '/../views/connexion.view.php'; 
@@ -17,9 +21,14 @@ function handle_request() {
         case 'inscription':
             require_once __DIR__ . '/../views/inscription.view.php';
             break;
+        
+        case 'deconnexion':
+            require_once __DIR__ . '/../views/connexion.view.php';
+            break;
 
         default:
-            echo "Page non trouvée.";
+            require_once __DIR__ . '/../views/404.view.php';
+            break;
     }
 }
 ?>

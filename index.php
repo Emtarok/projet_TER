@@ -19,6 +19,10 @@
 <?php
 $action = isset($_GET['action']) ? $_GET['action'] : 'home';
 
+// if ($action !== 'connexion' && $action !== 'inscription') {
+//     require_once __DIR__ . '/config/session_check.php';
+// }
+
 switch ($action) {
     case 'connexion':
         require_once __DIR__ . '/controllers/connexion.controller.php';
@@ -48,8 +52,20 @@ switch ($action) {
         require_once __DIR__ . '/controllers/creation.controller.php';
         break;
 
+    case 'update_postit':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+
+    case 'delete':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+        
     case "deconnexion":
         require_once __DIR__ . '/controllers/connexion.controller.php';
+        break;
+
+    case 'profil':
+        require_once __DIR__ . '/controllers/profil.controller.php';
         break;
 
     default:

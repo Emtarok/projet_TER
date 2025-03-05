@@ -20,12 +20,14 @@
             <div class="error-message" id="msg-form"></div>
                 <div class="card__face card__face--back">
                     <h2>Inscription</h2>
-                    <form id="inscriptionForm" action="?action=inscription" method="POST">
+                    <form id="inscriptionForm" action="?action=inscription" method="POST" onsubmit="return validateForm()">
                         <div class="form-group">
                             <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
+                            <div class="error-message" id="msg-nom"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
+                            <div class="error-message" id="msg-pr"></div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo">
@@ -57,8 +59,22 @@
             </div>
         </div>
     </div>
-    <!-- <script src="../public/js/verification.js"></script>s -->
     <script>
+        function redirectToSignIn() {
+            window.location.href = '?action=connexion';
+        }
+        function togglePassword(fieldId, icon) {
+            const field = document.getElementById(fieldId);
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                field.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
         $(document).ready(function{
             $("#inscriptionForm").validate({
                 rules: {
@@ -124,22 +140,6 @@
                 });
             });
         });
-        function redirectToSignIn() {
-            window.location.href = '?action=connexion';
-        }
-        function togglePassword(fieldId, icon) {
-            const field = document.getElementById(fieldId);
-            if (field.type === "password") {
-                field.type = "text";
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                field.type = "password";
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
     </script>
 </body>
 </html>

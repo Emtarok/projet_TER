@@ -67,7 +67,8 @@ function postit_id($positid){
     }
 }
 
-function create_postit($title, $content) {
+// Fonction qui permet la création d'un post-it
+function create_postit($title, $content, $sharedUsers) {
     $user = $_SESSION['user_id'];
     $conn = db_connect();
     if ($conn) {
@@ -79,20 +80,41 @@ function create_postit($title, $content) {
 
             if ($result) {
                 $last_postit_id = mysqli_insert_id($conn);
-                $sql_update_faits = "INSERT INTO faits (id_postit, id_utilisateur) VALUES (?, ?)";
-                $stmt_update_faits = mysqli_prepare($conn, $sql_update_faits);
-                if ($stmt_update_faits) {
-                    mysqli_stmt_bind_param($stmt_update_faits, "ii", $last_postit_id, $user);
-                    mysqli_stmt_execute($stmt_update_faits);
-                    mysqli_stmt_close($stmt_update_faits);
-                    mysqli_stmt_close($stmt);
+                // vérifie si des utilisateurs ont été selectionnes pour le partage dans la variable $sharedUsers si c'est le cas 
+                // on ajoute dans la table des faits les utilisateurs selectionnes avec les post-its et proprietaire du post-it correspondant
+                if(!empty($sharedUsers)) {
+                    foreach ($sharedUsers as $sharedUserId) {
+                        $stmt_shared = mysqli_prepare($conn, "INSERT INTO faits (id_postit, id_utilisateur, id_utilisateur_partage) VALUES (?, ?, ?)");
+                        if ($stmt_shared) {
+                            mysqli_stmt_bind_param($stmt_shared, "iii", $last_postit_id, $user, $sharedUserId);
+                            mysqli_stmt_execute($stmt_shared);
+                            mysqli_stmt_close($stmt_shared);
+                        } else {
+                            $error = mysqli_error($conn);
+                            mysqli_stmt_close($stmt);
+                            mysqli_close($conn);
+                            return "Erreur lors de la préparation de la requête d'insertion dans faits avec utilisateur partage: " . $error;
+                        }
+                    }
                     mysqli_close($conn);
                     return true;
-                } else {
-                    $error = mysqli_error($conn);
-                    mysqli_stmt_close($stmt);
-                    mysqli_close($conn);
-                    return "Erreur lors de la préparation de la requête de mise à jour des faits: " . $error;
+                }else{
+                    $last_postit_id = mysqli_insert_id($conn);
+                    $sql_update_faits = "INSERT INTO faits (id_postit, id_utilisateur) VALUES (?, ?)";
+                    $stmt_update_faits = mysqli_prepare($conn, $sql_update_faits);
+                    if ($stmt_update_faits) {
+                        mysqli_stmt_bind_param($stmt_update_faits, "ii", $last_postit_id, $user);
+                        mysqli_stmt_execute($stmt_update_faits);
+                        mysqli_stmt_close($stmt_update_faits);
+                        mysqli_stmt_close($stmt);
+                        mysqli_close($conn);
+                        return true;
+                    } else {
+                        $error = mysqli_error($conn);
+                        mysqli_stmt_close($stmt);
+                        mysqli_close($conn);
+                        return "Erreur lors de la préparation de la requête de mise à jour des faits: " . $error;
+                    }
                 }
             } else {
                 $error = mysqli_error($conn);
@@ -159,7 +181,7 @@ function get_content($id) {
 function update_postit($id, $title, $content) {
     $conn = db_connect();
     if ($conn) {
-        $sql = "UPDATE postit SET titre=?, contenu=? WHERE id=?";
+        $sql = "UPDATE postit SET titre=?, contenu=? WHERE idpostit=?";
         $stmt = mysqli_prepare($conn, $sql);
         if ($stmt) {
             mysqli_stmt_bind_param($stmt, "ssi", $title, $content, $id);
@@ -187,7 +209,7 @@ function update_postit($id, $title, $content) {
 // fonction qui permet de récupérer les prénoms des utilisateurs depuis la base de données (utilisé pour l'autocomplétion du partage de post-it)
 function get_prenoms($terme){
     $conn = db_connect();
-    $sql = "SELECT prenom FROM utilisateurs WHERE prenom LIKE ?";
+    $sql = "SELECT idutilisateur, prenom FROM utilisateurs WHERE prenom LIKE ?";
     $stmt = mysqli_prepare($conn, $sql);
     if ($stmt) {
         $terme = $terme . '%';
@@ -198,7 +220,7 @@ function get_prenoms($terme){
         $prenoms = [];
         if($result && mysqli_num_rows($result)> 0) {
             while ($row = mysqli_fetch_assoc($result))
-                $prenoms[] = $row["prenom"];
+                $prenoms[] = $row;
         }
 
         mysqli_stmt_close($stmt);
@@ -208,6 +230,62 @@ function get_prenoms($terme){
         $error = mysqli_error($conn);
         mysqli_close($conn);
         return "Erreur lors de la préparation de la requête: " . $error;
+    }
+}
+
+function get_postit_details($id) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "SELECT titre, contenu FROM postit WHERE idpostit = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_execute($stmt);
+            $result = mysqli_stmt_get_result($stmt);
+            $postit = null;
+            if ($result && mysqli_num_rows($result) > 0) {
+                $postit = mysqli_fetch_assoc($result);
+            }
+            mysqli_stmt_close($stmt);
+            mysqli_close($conn);
+            return $postit;
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
+    }
+}
+
+function delete_postit($id) {
+    $conn = db_connect();
+    if ($conn) {
+        $sql = "DELETE FROM postit WHERE idpostit = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            $result = mysqli_stmt_execute($stmt);
+            if ($result) {
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+                echo "çafonctionne jusqu'ici";
+                return true;
+            } else {
+                $error = mysqli_error($conn);
+                mysqli_stmt_close($stmt);
+                mysqli_close($conn);
+                echo "Requete pas prete";
+                return "Erreur " . $error;
+            }
+        } else {
+            $error = mysqli_error($conn);
+            mysqli_close($conn);
+            return "Erreur lors de la préparation de la requête de suppression du post-it: " . $error;
+        }
+    } else {
+        return "Erreur de connexion à la base de données";
     }
 }
 ?>
