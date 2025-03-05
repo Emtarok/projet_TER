@@ -1,3 +1,12 @@
+/* Couleurs du site */
+:root {
+    --color-primary: #A8E8F9;
+    --color-secondary: #00537A;
+    --color-tertiary: #013C58;
+    --color-accent1: #F5A201;
+    --color-accent2: #FFBA42;
+    --color-accent3: #FFD358;
+}
 body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
@@ -122,6 +131,12 @@ body {
 .search-container button:hover {
     color: #007bff;
 }
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+    text-decoration: underline;
+    transform: scale(1.);
+    color: #F5A201;
+    transition: all 0.3s;
+}
 .middle-column {
     width: 50%;
     margin-right: 1%;
@@ -131,8 +146,26 @@ body {
     justify-content: space-between;
     align-items: center;
 }
-.create_postit {
+.title{
     display: flex;
+    justify-content: space-between;
+}
+.title button{
+    height: fit-content;
+    border-radius: 50%;
+    font-size: x-large; 
+    background-color: #5f6368;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.card-title-h5{
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+.create_postit {
+    /* display: flex; */
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
@@ -152,6 +185,7 @@ body {
     margin-bottom: 20px;
 }
 .postit-card {
+    padding: 10px;
     margin-bottom: 15px;
     position: relative;
 }
@@ -244,9 +278,18 @@ body {
     resize: none;
 }
 
+<<<<<<< HEAD
 .input-error {
     border: 2px solid red;
     background-color: #ffcccc;
+=======
+/* css pour la croix rouge de suppresion des utilisateurs selectionnes dans l'autocompletion*/
+
+.croix {
+    color: #1c87c9;
+    text-shadow: 2px 2px 4px #00ffff;
+    font-size: 30px;
+>>>>>>> f8c96c1125959048f5b8a544577af6e071bc788d
 }
 
 .error-message {

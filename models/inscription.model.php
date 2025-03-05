@@ -22,8 +22,15 @@ function set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password) {
     $sql = "INSERT INTO utilisateurs (nom, prenom, email, date_naissance, pseudo, motdepasse) VALUES (?, ?, ?, ?, ?, ?)";
     $stm = mysqli_prepare($conn, $sql);
 
+    $sqlf = "INSERT INTO faits (id_utilisateur) VALUES (?)";
+    $stmf = mysqli_prepare($conn, $sqlf);
+
     mysqli_stmt_bind_param($stm, "ssssss", $nom, $prenom, $email, $date_naissance, $pseudo, $password);
     $result = mysqli_stmt_execute($stm);
+
+    $last_id = mysqli_insert_id($conn);
+    mysqli_stmt_bind_param($stmf, "i", $last_id);
+    $resultf = mysqli_stmt_execute($stmf);
 
     if ($result) {
         $response = ["success" => true, "message" => "Utilisateur ajouté avec succès"];
@@ -32,12 +39,12 @@ function set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password) {
     }
 
     mysqli_stmt_close($stm);
+    mysqli_stmt_close($stmf);
     mysqli_close($conn);
 
     return $response;
 }
 ?>
-
 
 
 

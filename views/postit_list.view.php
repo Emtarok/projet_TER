@@ -1,13 +1,14 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./public/css/style.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 mb-4">
@@ -29,107 +30,56 @@
                     <a class="nav-link" href="?action=list">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profil</a>
+                    <a class="nav-link" href="?action=profil">Profil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                    <a class="nav-link" href="?action=contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Deconnexion</a>
+                    <a class="nav-link" href="?action=deconnexion">Déconnexion</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div class="contrainer-fluid">
-        <div class="top">
-            <div class="create_postit">
-                <h5 class="card-title">La liste de vos Post-it</h5>
-                <button class="btn btn-primary" onclick="window.location.href='?action=create'">Nouveau</button>
-            </div>
-            <div class="create_postit">
-                <h5 class="card-title">Post partagé pour vous</h5>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid">
         <div class="middle-column">
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
+            <div class="create_postit">
+                <div class="title">
+                    <button class="btn btn-primary" onclick="window.location.href='?action=create'"><i class="fas fa-plus"></i></button>
+                    <h5 class="card-title-h5">La liste de vos Post-it</h5>
+                    <div></div>
                 </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>  
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>  
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>  
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                </div>
-            </div>
-            <div class="postit-card card">
-                <div class="card-body">
-                    <div>
-                        <h5 class="card-title"><a href="?action=details"> Post 2</a></h5>
-                        <p>Publié par John Doe</p>  
-                        <small class="text-muted">Publié le: 2023-10-02</small>
-                    </div>
-                </div>
+                <!-- structure d'un postit. -->
+                <?php
+                if (!empty($data)) {
+                    echo $_SESSION['message'] ?? '';
+                    foreach ($data as $postit){
+                    echo "
+                    <div class=\"postit-card card\">
+                        <div class=\"card-body\">
+                            <div>
+                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postit['idpostit']."\">".$postit['titre']."</a></h5>
+                                <small class=\"test-muted\">Publié le : ".$postit['date_post']."</small>
+                            </div>
+                        </div>
+                    </div>";
+                    }
+                } else {
+                    echo "<p>Aucun post-it trouvé</p>";
+                }
+                ?>
             </div>
         </div>
         <div class="right-column">
             <div class="postit-card card">
-                <div class="card-body">
-                    <a href="#" class="card-title">Post partagé pour vous</a>
+                <div class="title">
+                    <h5 class="card-title-h5">Postit partagé pour vous</h5>
+                    <div></div>
+                </div>
+                <div class="postit-card card">
+                    <div class="card-body">
+                        <a href="#" class="card-title">Post partagé pour vous</a>
+                    </div>
                 </div>
             </div>
         </div>

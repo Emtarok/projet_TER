@@ -1,5 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/gif" href="public/img/list.jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./public/css/style.css">
+    <title>Post-It</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    
+</body>
+</html>
 <?php
 $action = isset($_GET['action']) ? $_GET['action'] : 'home';
+
+// if ($action !== 'connexion' && $action !== 'inscription') {
+//     require_once __DIR__ . '/config/session_check.php';
+// }
 
 switch ($action) {
     case 'connexion':
@@ -19,7 +41,31 @@ switch ($action) {
         break;
     
     case 'create':
-        require_once __DIR__ . 'controllers/creation.controller.php';
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+    
+    case 'create_postit':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+
+    case 'update':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+
+    case 'update_postit':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+
+    case 'delete':
+        require_once __DIR__ . '/controllers/creation.controller.php';
+        break;
+        
+    case "deconnexion":
+        require_once __DIR__ . '/controllers/connexion.controller.php';
+        break;
+
+    case 'profil':
+        require_once __DIR__ . '/controllers/profil.controller.php';
         break;
 
     default:
