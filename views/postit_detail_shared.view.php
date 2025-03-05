@@ -6,9 +6,8 @@ if (!isset($_SESSION)) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light w-100 mb-4">
@@ -42,61 +41,50 @@ if (!isset($_SESSION)) {
         </div>
     </nav>
     <div class="container-fluid">
-        <div class="middle-column">
-            <div class="create_postit">
-                <div class="title">
-                    <button class="btn btn-primary" onclick="window.location.href='?action=create'"><i class="fas fa-plus"></i></button>
-                    <h5 class="card-title-h5">La liste de vos Post-it</h5>
-                    <div></div>
-                </div>
-                <!-- structure d'un postit. -->
+        <div class="middle-column"> 
+            <div class="postit-card card">
+            <!-- // affichage du postit sélectionné -->
                 <?php
-                if (!empty($data)) {
-                    echo $_SESSION['message'] ?? '';
-                    foreach ($data as $postit){
-                    echo "
-                    <div class=\"postit-card card\">
+                    foreach ($postitdetail as $postit){
+                        echo "
                         <div class=\"card-body\">
                             <div>
-                                <h5 class=\"card-title\"><a href=\"?action=details&id=".$postit['idpostit']."\">".$postit['titre']."</a></h5>
-                                <small class=\"text-muted\">Publié le : ".$postit['date_post']."</small>
+                                <h5 class=\"card-title\">".$postit['titre']."</h5>
+                                <p class=\"card-text\">".$postit['contenu']."</p>
+                                <small class=\"text-muted\">Publié le: ".$postit['date_post']."</small>
+                            </div>
+                            <div class=\"shared-users\">
+                                <h6>Partagé avec :</h6>
+                                <ul>";
+                                foreach ($sharedUsers as $user) {
+                                    echo "<li>".$user['prenom']."</li>";
+                                }
+                                echo "</ul>
                             </div>
                             <div class=\"options-container\">
-                                <button class=\"btn btn-light btn-sm\" onclick=\"redirectToDelete(".$postit['idpostit'].")\"><i class=\"fas fa-trash-alt\"></i></button>
+      
                             </div>
-                        </div>
-                    </div>";
+                        </div>";
                     }
-                } else {
-                    echo "<p>Aucun post-it trouvé</p>";
-                }
                 ?>
-            </div>
-        </div>
-        <div class="right-column">
-            <div class="postit-card card">
-                <div class="title">
-                    <h5 class="card-title-h5">Postit partagé pour vous</h5>
-                    <div></div>
+                <div class="card-footer">
+                    <div class="reaction-container">
+                        <button class="btn btn-light btn-sm"><i class="fas fa-thumbs-up"></i> J'aime</button>
+                        <div class="reaction-buttons">
+                            <button class="btn btn-light btn-sm" style="color: #007BFF;"><i class="fas fa-thumbs-up"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #FFD700;"><i class="fas fa-laugh"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #FF4500;"><i class="fas fa-angry"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #1E90FF;"><i class="fas fa-sad-tear"></i></button>
+                            <button class="btn btn-light btn-sm" style="color: #FF1493;"><i class="fas fa-heart"></i></button>
+                        </div>
+                    </div>
+                    <button class="btn btn-light btn-sm" onclick="toggleCommentSection(this)"><i class="fas fa-comment"></i> Commenter</button>
+                    <button class="btn btn-light btn-sm"><i class="fas fa-share"></i> Partager</button>
                 </div>
-                <?php
-                if (!empty($datapart)) {
-                    echo $_SESSION['message'] ?? '';
-                    foreach ($datapart as $postitpart){
-                    echo "
-                    <div class=\"postit-card card\">
-                        <div class=\"card-body\">
-                            <div>
-                                <h5 class=\"card-title\"><a href=\"?action=partages&id=".$postitpart['idpostit']."\">".$postitpart['titre']." (".$postitpart['prenom']."  ".$postitpart['nom'].")</a></h5>
-                                <small class=\"test-muted\">Publié le : ".$postitpart['date_post']."</small>
-                            </div>
-                        </div>
-                    </div>";
-                    }
-                } else {
-                    echo "<p>Aucun post-it trouvé</p>";
-                }
-                ?>
+                <div class="comment-section">
+                    <textarea class="form-control" rows="2" placeholder="Ecrire un commentaire..."></textarea>
+                    <button class="btn btn-primary btn-sm mt-2">Commenter</button>
+                </div>
             </div>
         </div>
     </div>
@@ -107,6 +95,9 @@ if (!isset($_SESSION)) {
             commentSection.style.paddingRight = '10px';
             commentSection.style.marginLeft = '10px';
             commentSection.style.marginBottom = '10px';
+        }
+        function redirectTo(id) {
+            window.location.href = '?action=update&id=' + id;
         }
         function redirectToDelete(id) {
             window.location.href = '?action=delete&id=' + id;

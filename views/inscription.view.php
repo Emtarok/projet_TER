@@ -13,8 +13,8 @@
 <body>
     <div class="login">
         <div class="description">
-            <h1>Nom de l'application</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar facilisis justo mollis, auctor consequat urna.</p>
+            <h1 >Post-it</h1>
+            <p>Créer, échanger et éxprimer vos idées gràce aux postit</p>
         </div>
         <div class="container">
             <div class="card w-100" id="card">
@@ -63,6 +63,7 @@
     <script>
          $(document).ready(function (){
             $("#inscriptionForm").validate({
+                errorClass: "error-message",
                 rules: {
                     nom: {
                         required: true,
@@ -128,24 +129,7 @@
                 });
             });
 
-        function redirectToSignUp() {
-            window.location.href = '?action=connexion';
-        }
-        function togglePassword(fieldId, icon) {
-            const field = document.getElementById(fieldId);
-            if (field.type === "password") {
-                field.type = "text";
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                field.type = "password";
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-
-        function redirectToSignUp() {
-            console.log('redirectToSignUp');
+        function redirectToSignIn() {
             window.location.href = '?action=connexion';
         }
         function togglePassword(fieldId, icon) {

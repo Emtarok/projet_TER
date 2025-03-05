@@ -36,6 +36,10 @@ switch ($action) {
         require_once __DIR__ . '/controllers/postit_detail.controller.php';
         break;
     
+    case 'partages':
+        require_once __DIR__ . '/controllers/postit_detail.controller.php';
+        break;
+
     case 'list':
         require_once __DIR__ . '/controllers/postit_list.controller.php';
         break;

@@ -26,14 +26,14 @@ function handle_request() {
         if ($success) {
             $user = get_user_profile($user_id);
         } else {
-            echo "Erreur lors de la mise à jour du profil";
+            // echo "Erreur lors de la mise à jour du profil";
         }
     }
 
     if ($user) {
         require_once __DIR__ . '/../views/profil.view.php';
     } else {
-        echo "Utilisateur non trouvé";
+        // echo "Utilisateur non trouvé";
     }
 }
 ?>

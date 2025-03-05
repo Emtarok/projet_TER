@@ -42,7 +42,7 @@ function handle_request() {
                         echo $result;
                     }
                 } else {
-                    echo "Veuillez remplir tous les champs";
+                    // echo "Veuillez remplir tous les champs";
                 }
             }
             require_once __DIR__ . '/../views/postit_list.view.php';
@@ -60,10 +60,10 @@ function handle_request() {
                 if ($postit) {
                     require_once __DIR__ . '/../views/update.view.php';
                 } else {
-                    echo "Post-it non trouvé";
+                    // echo "Post-it non trouvé";
                 }
             } else {
-                echo "ID du post-it manquant";
+                // echo "ID du post-it manquant";
             }
             break;
         
@@ -96,7 +96,7 @@ function handle_request() {
                         echo $result;
                     }
                 } else {
-                    echo "Veuillez remplir tous les champs";
+                    // echo "Veuillez remplir tous les champs";
                 }
             }
             require_once __DIR__ . '/../views/update.view.php';
@@ -117,12 +117,12 @@ function handle_request() {
                     echo $result;
                 }
             } else {
-                echo "ID du post-it manquant";
+                // echo "ID du post-it manquant";
             }
             break;
 
         default:
-            echo "Page non trouvée.";
+            // echo "Page non trouvée.";
     }
 }
 ?>

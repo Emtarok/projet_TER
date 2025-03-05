@@ -20,19 +20,19 @@ function get_data($userid){
                     $datas[] = $row;
                 }
             } else {
-                error_log("Aucun résultat trouvé pour l'utilisateur ID: $userid");
+                // error_log($userid);
             }
             mysqli_stmt_close($stmt);
             mysqli_close($conn);
             return $datas;
         } else {
             $error = mysqli_error($conn);
-            error_log("Erreur lors de la préparation de la requête: " . $error);
+            // error_log("Erreur lors de la préparation de la requête: " . $error);
             mysqli_close($conn);
             return "Erreur lors de la préparation de la requête";
         }
     } else {
-        error_log("Erreur de connexion à la base de données");
+        // error_log("Erreur de connexion à la base de données");
         return "Erreur de connexion à la base de données";
     }
 }
@@ -52,19 +52,19 @@ function get_partage($userid){
                     $datapart[] = $row;
                 }
             } else {
-                error_log("Aucun résultat trouvé pour l'utilisateur ID: $userid");
+                // error_log("Aucun résultat trouvé pour l'utilisateur ID: $userid");
             }
             mysqli_stmt_close($stmt);
             mysqli_close($conn);
             return $datapart;
         } else {
             $error = mysqli_error($conn);
-            error_log("Erreur lors de la préparation de la requête: " . $error);
+            // error_log("Erreur lors de la préparation de la requête: " . $error);
             mysqli_close($conn);
             return "Erreur lors de la préparation de la requête";
         }
     } else {
-        error_log("Erreur de connexion à la base de données");
+        // error_log("Erreur de connexion à la base de données");
         return "Erreur de connexion à la base de données";
     }
 
@@ -90,12 +90,12 @@ function postit_id($positid){
             return $postitdetail;
         } else {
             $error = mysqli_error($conn);
-            error_log("Erreur lors de la préparation de la requête: " . $error);
+            // error_log("Erreur lors de la préparation de la requête: " . $error);
             mysqli_close($conn);
             return "Erreur lors de la préparation de la requête.";
         }
     } else {
-        error_log("Erreur de connexion à la base de données");
+        // error_log("Erreur de connexion à la base de données");
         return "Erreur de connexion à la base de données";
     }
 }
@@ -194,7 +194,7 @@ function get_title($id) {
     } else {
         $error = mysqli_error($conn);
         mysqli_close($conn);
-        return "Erreur lors de la préparation de la requête: " . $error;
+        return $error;
     }
 }
 
@@ -217,7 +217,7 @@ function get_content($id) {
     } else {
         $error = mysqli_error($conn);
         mysqli_close($conn);
-        return "Erreur lors de la préparation de la requête: " . $error;
+        return $error;
     }
 }
 
@@ -273,7 +273,7 @@ function get_prenoms($terme){
     } else {
         $error = mysqli_error($conn);
         mysqli_close($conn);
-        return "Erreur lors de la préparation de la requête: " . $error;
+        return $error;
     }
 }
 
@@ -325,7 +325,7 @@ function delete_postit($id) {
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête de suppression du post-it: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";
@@ -354,7 +354,7 @@ function get_shared_users($postit_id) {
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";
@@ -375,7 +375,7 @@ function insert_shared_users($id_postit, $id_utilisateur, $sharedUserIds) {
                     $error = mysqli_error($conn);
                     mysqli_stmt_close($stmt);
                     mysqli_close($conn);
-                    return "Erreur lors de l'exécution de la requête d'insertion dans faits pour l'utilisateur partagé ID: $id_utilisateur_partage. Erreur: " . $error;
+                    return $id_utilisateur_partage. "Erreur: " . $error;
                 }
             }
             mysqli_stmt_close($stmt);
@@ -384,7 +384,7 @@ function insert_shared_users($id_postit, $id_utilisateur, $sharedUserIds) {
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête d'insertion dans faits: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";
@@ -411,7 +411,7 @@ function get_user_id_from_postit($id_postit){
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";
@@ -432,7 +432,7 @@ function delete_shared_users($id_postit, $sharedUserIds) {
                     $error = mysqli_error($conn);
                     mysqli_stmt_close($stmt);
                     mysqli_close($conn);
-                    return "Erreur lors de l'exécution de la requête de suppression dans faits pour l'utilisateur partagé ID: $id_utilisateur_partage. Erreur: " . $error;
+                    return $id_utilisateur_partage. "Erreur: " . $error;
                 }
             }
             mysqli_stmt_close($stmt);
@@ -441,7 +441,7 @@ function delete_shared_users($id_postit, $sharedUserIds) {
         } else {
             $error = mysqli_error($conn);
             mysqli_close($conn);
-            return "Erreur lors de la préparation de la requête de suppression dans faits: " . $error;
+            return $error;
         }
     } else {
         return "Erreur de connexion à la base de données";

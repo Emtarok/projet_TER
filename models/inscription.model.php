@@ -14,7 +14,8 @@ function set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password) {
     if ($result && mysqli_num_rows($result) > 0) {
         mysqli_stmt_close($verif_stmt);
         mysqli_close($conn);
-        return ["success" => false, "message" => "Cet email est déjà utilisé. Veuillez en choisir un autre."];
+        // return ["success" => false, "message" => "Cet email est déjà utilisé. Veuillez en choisir un autre."];
+        return false;
     }
 
     mysqli_stmt_close($verif_stmt);
@@ -33,9 +34,11 @@ function set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password) {
     $resultf = mysqli_stmt_execute($stmf);
 
     if ($result) {
-        $response = ["success" => true, "message" => "Utilisateur ajouté avec succès"];
+        // $response = ["success" => true, "message" => "Utilisateur ajouté avec succès"];
+        $response = true;
     } else {
-        $response = ["success" => false, "message" => "Erreur lors de l'ajout de l'utilisateur"];
+        // $response = ["success" => false, "message" => "Erreur lors de l'ajout de l'utilisateur"];
+        $response = false;
     }
 
     mysqli_stmt_close($stm);

@@ -18,7 +18,6 @@ function get_data($email) {
             $user = mysqli_fetch_assoc($result);
         }
     }else{
-        echo "Erreur lors de la préparation de la requête";
         if (!$stm) {
             die("Erreur de préparation de la requête SQL : " . mysqli_error($conn));
         }

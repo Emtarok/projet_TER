@@ -22,24 +22,24 @@ function handle_request() {
                             $_SESSION['user_id'] = $user['idutilisateur'];
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['pseudo'] = $user['pseudo'];
-                            echo "Connexion réussie";
+                            // echo "Connexion réussie";
                             // Envoyer l'utilisateur à la page postit_list
                             header('Location: index.php?action=list');
                             exit();
                         } else {
-                            echo "Mot de passe incorrect";
+                            // echo "Mot de passe incorrect";
                             require_once __DIR__ . '/../views/connexion.view.php';
                         }
                     } else {
-                        echo "Email incorrect";
+                        // echo "Email incorrect";
                         require_once __DIR__ . '/../views/connexion.view.php';
                     }
                 } else {
-                    echo "Veuillez remplir tous les champs";
+                    // echo "Veuillez remplir tous les champs";
                     require_once __DIR__ . '/../views/connexion.view.php';
                 }
             } else {
-                echo "Méthode non autorisée";
+                // echo "Méthode non autorisée";
                 require_once __DIR__ . '/../views/connexion.view.php';
             }
             break;
@@ -61,11 +61,11 @@ function handle_request() {
                 $password_h = password_hash($password, PASSWORD_DEFAULT);
                 $response = set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password_h);
                 if ($response['success']) {
-                    echo $response['message'];
+                    // echo $response['message'];
                     require_once __DIR__ . '/../views/connexion.view.php';
                     exit();
                 } else {
-                    echo $response['message'];
+                    // echo $response['message'];
                     require_once __DIR__ . '/../views/inscription.view.php';
                     exit();
                 }
