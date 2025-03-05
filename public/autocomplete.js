@@ -2,13 +2,6 @@ $(document).ready(function () {
 
     let utilisateursSelectionnes = [];
 
-    // Fonction pour mettre à jour l'affichage des tableaux
-    function updateDisplay() {
-        document.getElementById('utilisateursSelectionnesContent').innerText = JSON.stringify(utilisateursSelectionnes, null, 2);
-        const selectedUsers = utilisateursSelectionnes.map(user => user.idutilisateur);
-        document.getElementById('selectedUsersContent').innerText = JSON.stringify(selectedUsers, null, 2);
-    }
-
     // Auto-completion avec requête ajax
     $("#prenom_partage").on("input", function() {
         let terme = $(this).val();
@@ -56,7 +49,6 @@ $(document).ready(function () {
             $("#prenom_partage").val("");
             $("#suggestions").hide();
         }
-        updateDisplay();
     });
 
     // Suppression de l'utilisateur selectionne
@@ -64,7 +56,6 @@ $(document).ready(function () {
         let idutilisateur = $(this).data("id");
         utilisateursSelectionnes = utilisateursSelectionnes.filter(user => user.idutilisateur !== idutilisateur);
         $(this).parent().remove();
-        updateDisplay();
     });
 
     // permet de cacher les suggestions lorsqu'on clique en dehors de celle-ci
@@ -78,13 +69,11 @@ $(document).ready(function () {
     function handleSharedUsers() {
         const selectedUsers = utilisateursSelectionnes.map(user => user.idutilisateur); // Array to store selected user IDs
         document.getElementById('utilisateurs_partages').value = JSON.stringify(selectedUsers);
-        updateDisplay();
     }
 
     // Ajoutez un écouteur d'événement pour la soumission du formulaire
     $("#postitForm").on("submit", function(event) {
         handleSharedUsers();
-        console.log("Form submitted with shared users:", document.getElementById('utilisateurs_partages').value); // Ajoutez ce log pour vérifier le champ caché
     });
 
 });

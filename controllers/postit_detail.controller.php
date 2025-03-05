@@ -12,6 +12,9 @@ function handle_request() {
                 $postitid = $_GET['id'];
                 $postitdetail = postit_id($postitid);
                 if ($postitdetail) {
+                    // appel qui permet de recuperer les prenoms des utilisateurs partages
+                    $sharedUsers = get_shared_users($postitid);
+                    get_postit_details($postitid);
                     require_once __DIR__ . '/../views/postit_detail.view.php';
                 } else {
                     echo "Postit non trouvé";
