@@ -8,50 +8,49 @@ function handle_request() {
     switch ($action) {
         case 'connexion':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                if(isset($_POST['email']) && isset($_POST['password'])){
-            
+                if (isset($_POST['email']) && isset($_POST['password'])) {
                     $email = $_POST['email'];
                     $password = $_POST['password'];
-                    //recuperer a travers get_data() les données de la base de données
+                    // Récupérer les données de la base de données
                     $user = get_data($email);
-                    echo $user['email'];
-                    if ($user !== null) {
-                        //vérification du mot de passe
+                    
+                    // Vérifier si $user est un tableau et contient les clés attendues
+                    if ($user !== null && is_array($user) && isset($user['email'])) {
+                        // Vérification du mot de passe
                         if (password_verify($password, $user['motdepasse'])) {
                             session_start();
                             $_SESSION['user_id'] = $user['idutilisateur'];
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['pseudo'] = $user['pseudo'];
                             echo "Connexion réussie";
-                            //envoyer l'utilisateur à la page postit_list
+                            // Envoyer l'utilisateur à la page postit_list
                             header('Location: index.php?action=list');
-                            require_once __DIR__ . '/../views/postit_list.view.php';
                             exit();
-                        }else{
+                        } else {
                             echo "Mot de passe incorrect";
                             require_once __DIR__ . '/../views/connexion.view.php';
                         }
-                    }else{
+                    } else {
                         echo "Email incorrect";
                         require_once __DIR__ . '/../views/connexion.view.php';
                     }
-                }else{
+                } else {
                     echo "Veuillez remplir tous les champs";
                     require_once __DIR__ . '/../views/connexion.view.php';
                 }
-            }else{
+            } else {
                 echo "Méthode non autorisée";
                 require_once __DIR__ . '/../views/connexion.view.php';
             }
-            break; 
-        
+            break;
+
         case 'inscription':
             // ...code pour gérer l'action inscription...
-            if(!isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['date_naissance'], $_POST['pseudo'], $_POST['password'])){
+            if (!isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['date_naissance'], $_POST['pseudo'], $_POST['password'])) {
                 echo "Veuillez remplir tous les champs";
                 require_once __DIR__ . '/../views/inscription.view.php';
                 exit();
-            }else{
+            } else {
                 $nom = $_POST['nom'];
                 $prenom = $_POST['prenom'];
                 $email = $_POST['email'];
@@ -61,18 +60,17 @@ function handle_request() {
                 //$confirm_password = $_POST['confirm_password'];
                 $password_h = password_hash($password, PASSWORD_DEFAULT);
                 $response = set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password_h);
-                if($response['success']){
+                if ($response['success']) {
                     echo $response['message'];
                     require_once __DIR__ . '/../views/connexion.view.php';
                     exit();
-                }else{
+                } else {
                     echo $response['message'];
                     require_once __DIR__ . '/../views/inscription.view.php';
                     exit();
                 }
             }
-            break;
-        
+
         case 'deconnexion':
             // ...code pour gérer l'action deconnexion...
             session_start();
@@ -80,7 +78,6 @@ function handle_request() {
             session_destroy();
             header('Location: index.php?action=connexion');
             exit();
-            break;
 
         default:
             echo "Page non trouvée.";
