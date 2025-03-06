@@ -1,10 +1,14 @@
 <?php
 require_once __DIR__ . '/../config/database.php';
-
+/*
+set_data() : a partir des informations saisie dans le formulaire d'inscription, elle les insère dans la base de données
+parametres : $nom, $prenom, $email, $date_naissance, $pseudo, $password
+retourne true si l'insertion est effectuée avec succès sinon retourne false
+*/
 function set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password) {
     $conn = db_connect();
 
-    // Vérifier si l'email existe déjà dans la base de données
+    // Vérification de l'unicité de l'email
     $verif_sql = "SELECT idutilisateur FROM utilisateurs WHERE email = ?";
     $verif_stmt = mysqli_prepare($conn, $verif_sql);
     mysqli_stmt_bind_param($verif_stmt, "s", $email);
@@ -19,10 +23,10 @@ function set_data($nom, $prenom, $email, $date_naissance, $pseudo, $password) {
     }
 
     mysqli_stmt_close($verif_stmt);
-
+    //Requête d'insertion dans la table utilisateurs
     $sql = "INSERT INTO utilisateurs (nom, prenom, email, date_naissance, pseudo, motdepasse) VALUES (?, ?, ?, ?, ?, ?)";
     $stm = mysqli_prepare($conn, $sql);
-
+    //Requête d'insertion dans la table faits
     $sqlf = "INSERT INTO faits (id_utilisateur) VALUES (?)";
     $stmf = mysqli_prepare($conn, $sqlf);
 

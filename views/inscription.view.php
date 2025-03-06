@@ -61,15 +61,25 @@
     </div>
     <!-- <script src="../public/js/verification.js"></script> -->
     <script>
+        //utilisation de la librairie jQuery pour la validation du formulaire
+        //validate() : permet de valider les champs du formulaire
          $(document).ready(function (){
             $("#inscriptionForm").validate({
+
+                //errorClass:défini la classe à ajouter aux éléments en erreur
                 errorClass: "error-message",
+
+                //highlight: met en évidence les champs non valides
                 highlight: function(element) {
                     $(element).addClass("error"); 
                 },
+
+                //unhighlight: retire la mise en évidence des champs non valides
                 unhighlight: function(element) {
                     $(element).removeClass("error");
                 },
+
+                //les règles de validation des champs
                 rules: {
                     nom: {
                         required: true,
@@ -97,13 +107,12 @@
                         equalTo: "#signup-password"
                     },
                 },
+
+                //les messages d'erreurs afficher lorsque les champs ne sont pas valides
                 messages: {
                     nom: "Veuillez entrer votre nom",
                     prenom: "Veuillez entrer votre prénom",
-                    pseudo: {
-                        required: "Veuillez entrer votre pseudo",
-                        minlength: "Le pseudo doit contenir au moins 2 caractères"
-                    },
+                    pseudo: "Veuillez entrer votre pseudo",
                     email: {
                         required: "Veuillez entrer votre email",
                         email: "Veuillez entrer une adresse email valide"
@@ -121,13 +130,14 @@
                         equalTo: "Les mots de passe ne correspondent pas"
                     },
                 },
+
                 //soumettre le formulaire seulement si il est valide
                 submitHandler: function(form) {
                     form.submit();
                 }
                 });
 
-                // Empêcher la soumission du formulaire si non valide
+                // bloquer la soumission du formulaire si non valide
                 $("#inscriptionForm").submit(function(event) {
                     if (!$(this).valid()) {
                         event.preventDefault();
