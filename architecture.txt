@@ -1,0 +1,163 @@
+Installation
+Sur MacOS :
+L’utilisation de MAMP est préconisée (version utilisée 7.2). Comme XAMPP, il installe une base de données MySQL.
+Le déploiement de la base de données se fait par l’utilisation du fichier BD_1.0.sql.
+Au niveau des préférences, il n’est pas nécessaire de modifier celles par défaut.
+Pour MySQL, la version par défaut est 8.0.40, et pour PHP la version est 8.3.14.
+Dans le réglage par défaut, les fichiers du site sont à mettre dans le dossier ../MAMP/htdocs/. Il est possible de changer l’emplacement de ce dossier.
+
+Sous Windows :
+On utilisera XAMPP il suffit de lancer en cliquant sur “Admin” après avoir lancé le module “Apache”. Il faut lancer le module “MySQLégalement et une fois sur phpMyAdmin il faut importer le fichier “BD_1.0.sql” pour avoir la base de donnée.
+
+Version de PHP utilisé 8.0.30
+XAMP version 3.3.0
+Fichiers
+Structuration du projet
+
+
+
+Config: 
+Contient les configurations pour la connexion a la base et la vérification de session.
+Controllers:
+Contient tout les controleurs
+Models
+Contient les modèles utilisées
+Public
+Contient les contenu public : CSS, JS, les images publics
+Views
+Contient les pages d’affichage
+A la racine
+index.php
+Config
+database.php
+Contient la fonction db_connect(). Elle sert à se connecter à la base de données lorsqu’il est nécessaire de faire une requête SQL.
+
+session_check.php
+Description du fichier
+Controllers
+Inscription inscription.controller.php
+Ce fichier récupère les champs renseignés par l’utilisateur, vérifie que tous les champs sont remplis, hache le mot de passe et fait appel au modèle pour insérer les informations dans la base de données. Si l’inscription réussit, l’utilisateur est redirigé vers la page de connexion, sinon il revient sur la page d’inscription avec un message d’erreur.
+
+Connexion connexion.controller.php
+Ce fichier gère la connexion des utilisateurs. Il récupère l'email et le mot de passe saisis, vérifie si l'email existe dans la base de données et si le mot de passe correspond après vérification avec le hachage. Si la connexion réussit, une session est démarrée et l'utilisateur est redirigé vers la page principale, sinon il reste sur la page de connexion avec un message d'erreur.
+
+postit_list.controller.php
+En début de fichier, une vérification sur la présence d’une session ouverte est faite. 
+La fonction handle_request() permet de récupérer le type d’action en cours, ici l’action sera ‘list’. 
+Il y a une récupération de l’ID de l’utilisateur grâce à la session qui est ouverte, et stockée. Puis il y a un appel de la fonction get_data() avec l’ID de l’utilisateur passé en paramètre.
+On appelle ensuite la page postit_list.view.php.
+
+Il n’y a pas une nouvelle vérification de la présence de l’ID utilisateur, car cette vérification a été faite lors de l’ouverture de session.
+
+postit_detail.controller.php
+En début de fichier, une vérification sur la présence d’une session ouverte est faite.
+La fonction handle_request() permet de récupérer le type d’action en cours, ici l’action sera ‘detail’. De plus, la fonction récupère aussi l’ID du post, sur lequel l’utilisateur a cliqué, pour afficher les détails.
+Si la récupération de l’ID du post-it est OK, alors on appelle la page postit_detail.view.php.
+Si la récupération de l’ID est OK, mais que le post-it n’existe plus (cas d’un post-it partagé qui a été supprimé par son propriétaire), ou si l’ID est manquant, alors un message d’erreur s’affiche.
+Models
+
+Inscription inscription.model.php
+Ce fichier contient la fonction set_data() qui permet d'ajouter un utilisateur à la base de données. Lorsque les informations du formulaire d'inscription sont envoyées, la fonction vérifie d'abord si l'email est déjà utilisé dans la base de données. Si c'est le cas, elle retourne false. Sinon, elle insère les informations de l'utilisateur dans la table utilisateurs et crée un enregistrement dans la table faits. Si l'insertion réussit, la fonction retourne true, sinon elle retourne false.
+
+Connexion connexion.model.php
+Ce fichier contient la fonction get_data() qui récupère les informations d'un utilisateur en fonction de son email. Si l'email est trouvé dans la base de données, les informations de l'utilisateur sont retournées, sinon la fonction renvoie null.
+
+postit.model.php
+En début de fichier, une vérification sur la présence d’une session ouverte est faite.
+
+Plusieurs fonctions sont définies dans ce fichier.
+get_data($userid) : une connexion à la base de données est préparée car il va y avoir l’utilisation d’une requête SQL. Si la connexion est bien établie, une requête est préparée pour récupérer le titre, le contenu, la date, et l’ID du post-it.
+Si la connexion et la requête sont OK, un test est fait pour vérifier s’il l’utilisateur connecté a des post-its créés ou non.
+S’il y a des enregistrements, une récupération de la liste de tous les post-its de l’utilisateur est faite. Les enregistrements sont stockés dans un tableau (tableau de lignes d’enregistrement).
+S’il n’y a pas d'enregistrements (cas d’un nouvel utilisateur par exemple), un message s’affiche signalant l’absence de post-it.
+Puis il y a fermeture de la requête et de la connexion à la base de données.
+De plus, si la requête n’est pas correcte, un message est envoyé et une clôture de la connexion est faite.
+Enfin, si la connexion ne peut pas être établie, un message est aussi envoyé.
+get_partage($userid) : une connexion à la base de données est préparée, en vue de l’utilisation d’une requête SQL. Si la connexion est bien établie, une requête est préparée pour récupérer le titre, le contenu, la date, et l’identité du créateur du post-it. La requête, ici, compare l’ID de l’utilisateur connecté et id_utilisateur_partage dans la table faits.
+Le reste de la fonction est identique à la fonction get_data($userid). Elle permet de construire un tableau avec les enregistrements trouvés en base de données et qui répondent à la contrainte.
+postit_id($postitid) : une connexion à la base de données est préparée, en vue de l’utilisation d’une requête SQL. Si la connexion est bien établie, une requête est préparée pour récupérer le titre, le contenu, et la date.
+Si la connexion et la requête sont OK, les informations du post-it sélectionné sont stocké dans un tableau. Ceci est identique à la fonction get_data($userid) sauf qu’ici il n’y aura qu’un seul enregistrement.
+S’il y a un résultat à la requête, l’enregistrement est stocké dans un tableau.
+Si la requête n’est pas bonne, il y a un message qui est envoyé, et la connexion à la base de données est fermée.
+Enfin, si la connexion n’a pas pu être établie, un message d’erreur est envoyé.
+get_prenoms($terme) : cette fonction s’occupe de récupérer les prénoms des utilisateurs qui corresponde à la recherche effectuée. Elle est utilisée pour l'auto-complétion. C’est dans cette fonction qu’on fait la requête SQL avec un “LIKE” pour la recherche. 
+get_shared_users($postit_id) : cette fonction permet de récupérer les prénoms des utilisateurs avec qui un post-it est partagé. Il est utile pour avoir les prénoms qui s’affiche dans le détail d’un post-it.
+insert_shared_users($id_postit, $id_utilisateur, sharedUserIds) : elle permet d’ajouter dans la table des faits un enregistrement avec l’id d’un post-it et l’id de l’utilisateur avec qui il est partagé et son créateur. Elle est utilisé lors de l’ajout d’un nouvelle utilisateur avec qui on partage le post-it lors de la modification.
+get_user_id_from_postit($id_postit) : permet de récupérer l’id d’un utilisateur en fonction de son post-it ce qui nous est utile lors de l’ajout d’un utilisateur à qui on souhaite partagé le post-it durant la modification de celui-ci.
+delete_shared_users($id_postit, $sharedUserIds) : s’occupe d' envoyer une requête SQL pour supprimer les enregistrements de la table des faits qui lie un post-it et l’utilisateur avec qui il est partagé. Elle est appelé lors de la suppression d’un utilisateur partagé dans l’édition d’un post-it.
+
+Views
+Inscription inscription.view.php
+Ce code HTML crée un formulaire d'inscription avec validation des champs (nom, prénom, email, date de naissance, mot de passe) via jQuery. Il affiche des messages d'erreur pour les champs invalides et empêche la soumission si le formulaire est incorrect. Il permet aussi de basculer la visibilité des mots de passe et redirige vers la page de connexion si l'utilisateur a déjà un compte.
+
+Connexion connexion.view.php
+Le code HTML crée une page de connexion simple avec un formulaire. Il inclut un champ pour l'email, un champ pour le mot de passe et un bouton pour se connecter. Le mot de passe est masqué par défaut, mais l'utilisateur peut cliquer sur l'icône pour afficher ou masquer le mot de passe. Un bouton permet de rediriger l'utilisateur vers la page d'inscription si celui-ci n'a pas encore de compte.
+
+postit_list.view.php
+En début de fichier, une vérification sur la présence d’une session ouverte est faite.
+S’ensuit le code html de la page principale du site.
+Dans la zone des post-its de l’utilisateur connecté (div de la classe “middle_column”), il y a un bloc de code php pour l’affiche des post-its de l’utilisateur.
+Si le tableau contenant la liste des post-its, remplit par la fonction get_data(), n’est pas vide alors pour chaque ligne dans le tableau on génère un code html pour l’affichage et la mise page du post-it. Si le tableau est vide, un message est affiché dans la zone, signalant l’absence de post-it pour l’utilisateur.
+Dans la zone des post-its partagés avec l’utilisateur connecté (div de la classe middle-column), il y a un bloc de code comme pour la zone des post-its de l’utilisateur. La seule différence est qu’il est affiché l’identité de la personne qui a créé le post-it.
+
+postit_detail.view.php
+En début de fichier, une vérification sur la présence d’une session ouverte est faite.
+Le reste du fichier comprend le code html de la page de détail d’un post-it de la liste des post-its personnels. Ici, le post-it peut être modifié ou supprimé.
+
+postit_detail_shared.view.php
+En début de fichier, une vérification sur la présence d’une session ouverte est faite.
+Le reste du fichier comprend le code html de la page de détail d’un post-it de la liste des post-its partagés. Contrairement au fichier postit_detail.view.php, il n’y a pas la possibilité de modifier ou supprimer le post-it affiché.
+
+update.view.php
+Le fichier update.view.php est une vue qui permet à l'utilisateur de modifier un post-it existant. Il affiche un formulaire pré rempli avec les détails du post-it et permet à l'utilisateur de mettre à jour le titre, le contenu et les utilisateurs avec qui le post-it est partagé. Le fichier update.view.php est appelé lorsque l'utilisateur souhaite modifier un post-it existant. Cela se produit généralement lorsque l'utilisateur clique sur un bouton ou un lien de modification associé à un post-it. Il est appelé par creation.controller.php qui détecte que l'utilisateur souhaite modifier un post-it et redirige vers la vue update.view.php par un switch. Le contrôleur passe également les détails du post-it et les utilisateurs partagés pour pré remplir le formulaire. 
+
+404.view.php
+Le fichier 404.view.php est une page d'erreur personnalisée qui s'affiche lorsque l'utilisateur tente d'accéder à une page qui n'existe pas ou qui a été déplacée. Le fichier 404.view.php est appelé lorsque l'utilisateur tente d'accéder à une page qui n'existe pas ou qui a été déplacée. Cela se produit lorsque le contrôleur ne trouve pas la route ou l'action demandée. Le contrôleur de l'application détecte que la page demandée n'existe pas et redirige l'utilisateur vers la page 404.view.php. Il sert ainsi à afficher une page d'erreur personnalisée lorsque l'utilisateur tente d'accéder à une page inexistante. Il est appelé par le contrôleur lorsque l'action ou la route demandée n'est pas trouvée.
+
+
+Public
+
+autocomplete.js
+Le fichier autocomplete.js est un script jQuery qui gère l'autocomplétion des prénoms pour la fonctionnalité de partage d'un post-it sur le site web. Il permet à l'utilisateur de sélectionner des prénoms suggérés dynamiquement, d'ajouter ces prénoms à une liste, et de gérer leur suppression.
+AJAX (Asynchronous JavaScript and XML) permet d'envoyer une requête HTTP à un serveur sans recharger la page. On a une requête GET est envoyée avec le paramètre terme, qui contient le début du prénom saisi (à partir des 2 premières lettres entrées). Le serveur renvoie une liste d'utilisateurs correspondant à cette saisie sous forme de JSON issue du controller appelé dans la configuration du ajax (autocomplete.controller.php). Si la requête réussit (« success : »), les résultats sont traités et affichés dynamiquement dans la liste des suggestions. Si la requête échoue (« error : »), un message d'erreur détaillé est affiché dans la console. Cela évite d’avoir à recharger la page en entier car ajax permet de faire une requête sur une partie du code ainsi on peut faire l'auto complétion sans avoir à recharger la page entière.
+.gitignore
+
+Le fichier .gitignore est utilisé dans un projet Git pour spécifier les fichiers et répertoires qui ne doivent pas être suivis ni ajoutés au dépôt. Cela permet d'éviter d'inclure des fichiers inutiles ou sensibles. Dans notre cas, il contient des fichiers temporaires propres à un développeur.
+
+Creation/modification/suppression:
+Les fonctions sont : 
+Create_postit() : Qui fait la création d’un postit en récupérant les informations depuis la vue et les envoient dans l’url pour les traitées dans le modèle,le titre, le contenu et l’id de l'utilisateur sont utiles pour la création d’un postit.
+get_title() et get_content(): On a créé ces fonctions pour récupérer le titre et le contenu du postit que l’on veut afficher les détails, les retours sont utilisés pour les précharger dans l’interface de modification. 
+delete_postit(): prend en paramètre l’id du postit choisi et l’envoi dans le model pour choisir la ligne à supprimer dans la base de données.
+1) Création des Post-its :
+Dans creation on utilise la creation.view.php, qui est géré par la creation.controller.php qui fait appel au postit.model.php : 
+L’id de l’utilisateur connecté est récupéré pour pouvoir créer le post-it
+Un formulaire est fourni à l'utilisateur pour entrer le contenu du post-it. creation.view.php
+Les données saisies sont validées pour s'assurer qu'elles ne sont pas vides et qu'elles respectent un certain format.
+Les données validées sont stockées dans une base de données ou un fichier. Grâce à postit.model.php(fonction create_postit())
+Le nouveau post-it est affiché sur l'interface utilisateur. L'affichage se fait dynamiquement, une fois que le postit est inséré dans la base, elle s'affiche automatiquement dans l'interface postit_list.view.php
+2) Modification des Post-its
+Dans modification, on utilise la update.view.php, qui est géré par la creation.controller.php qui fait appel au postit.model.php : 
+L'utilisateur sélectionne le post-it à modifier. l'id du post-it est récupéré et envoyé pour interroger la base afin de récupérer les informations sur ce post-it, la page update.view.php est alors affichée avec les informations du post-it préchargées
+Un formulaire pré rempli avec les données actuelles du post-it est affiché.
+Les modifications sont validées pour s'assurer qu'elles ne sont pas vides.si les modifications respectent le format demandé, les informations de modification sont alors envoyées dans la base de données et les informations sont mise a jour dans la base 
+Les données validées sont mises à jour dans la base de données ou le fichier.
+Le post-it mis à jour est affiché sur l'interface utilisateur. Le postit mis à jour s'affiche automatiquement dans la page postit_list.view.php
+3) Suppression des Post-its
+Dans suppression on utilise la postit_list.view.php, postit_detail.view.php et postit_detail.view.php, qui est géré par la creation.controller.php qui fait appel au postit.model.php : 
+L'utilisateur sélectionne le post-it à supprimer. Le principe de suppression est aussi la même pour la modification, on récupère l'id du postait et on l'utilise dans la requête de suppression du post-it dans la base,
+Une confirmation est demandée à l'utilisateur pour éviter les suppressions accidentelles.
+Le post-it est supprimé de la base de données ou du fichier.
+L'interface utilisateur est mise à jour pour ne plus afficher le post-it supprimé.
+4) Partage des Post-its
+Lors de la création ou de la modification d’un post-it une barre de recherche qui se filtre dynamiquement est présente pour chercher et sélectionner un utilisateur avec qui on veut partager le post-it
+La barre de recherche n’est pas sensible à la casse, elle fonctionne sur le prénom et fait la recherche par rapport au début du prénom et elle se met à jour dès que l’on ajoute quelque chose dans la barre de recherche mais à partir de 2 caractères
+La soumission de tous les utilisateurs sélectionnées se fait uniquement lors submit
+Les post-its que l’on possède et que l’on partage et qui nous sont partagés sont affichés dans la zone de partage à droite 
+
+Nous avons opté pour une architecture MVC (Modèle - Vue - Contrôleur) car c’est une approche largement adoptée en développement web qui nous permet d’avoir davantage d’expérience avec. Elle permet de séparer les responsabilités de manière claire, rendant le code plus modulaire, réutilisable et maintenable.
+Model : s’occupe de gérer la logique métier et l’accès aux données. Elle communique avec la base de données pour récupérer, insérer ou modifier des informations. Et ne contient pas d’affichage, uniquement des traitements et des interactions avec les données.
+View : cette partie est responsable de l’affichage des informations à l’utilisateur. En affichant les données fournies par le modèle dans un format compréhensible (HTML, CSS, JavaScript). Et elle ne contient pas de logique métier, uniquement du rendu visuel.
+Controller : Sert intermédiaire entre le modèle et la vue. Cette section gère les requêtes utilisateurs, envoie les données au modèle et transmet les résultats à la vue. Et elle exécute la logique applicative, comme ajouter un post-it ou partager un post-it avec un utilisateur.
+Avantages :
+On peut ajouter des fonctionnalités sans impacter le reste du projet. En cas de bug ou d'évolution, il est plus simple d’identifier et modifier uniquement le composant concerné. Un même modèle peut être utilisé par plusieurs vues. Un développeur peut travailler sur la partie affichage sans toucher à la logique derrière.
