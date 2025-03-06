@@ -1,20 +1,4 @@
-Installation
-Sur MacOS :
-L’utilisation de MAMP est préconisée (version utilisée 7.2). Comme XAMPP, il installe une base de données MySQL.
-Le déploiement de la base de données se fait par l’utilisation du fichier BD_1.0.sql.
-Au niveau des préférences, il n’est pas nécessaire de modifier celles par défaut.
-Pour MySQL, la version par défaut est 8.0.40, et pour PHP la version est 8.3.14.
-Dans le réglage par défaut, les fichiers du site sont à mettre dans le dossier ../MAMP/htdocs/. Il est possible de changer l’emplacement de ce dossier.
-
-Sous Windows :
-On utilisera XAMPP il suffit de lancer en cliquant sur “Admin” après avoir lancé le module “Apache”. Il faut lancer le module “MySQLégalement et une fois sur phpMyAdmin il faut importer le fichier “BD_1.0.sql” pour avoir la base de donnée.
-
-Version de PHP utilisé 8.0.30
-XAMP version 3.3.0
-Fichiers
 Structuration du projet
-
-
 
 Config: 
 Contient les configurations pour la connexion a la base et la vérification de session.
