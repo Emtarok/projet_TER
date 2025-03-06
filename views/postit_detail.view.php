@@ -95,12 +95,9 @@ if (!isset($_SESSION)) {
         function redirectTo(id) {
             window.location.href = '?action=update&id=' + id;
         }
-        function redirectToDelete(id) {
-            window.location.href = '?action=delete&id=' + id;
-        }
         function confirmDelete(id) {
             if (confirm("Êtes-vous sûr de vouloir supprimer ce post-it ?")) {
-                redirectToDelete(id);
+                window.location.href = '?action=delete&id=' + id;
             }
         }
     </script>
