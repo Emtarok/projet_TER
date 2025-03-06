@@ -22,7 +22,7 @@ function get_data($email) {
             die("Erreur de préparation de la requête SQL : " . mysqli_error($conn));
         }
     }
-    echo $user['email'];
+    // echo $user['email'];
     mysqli_close($conn);
 
     return $user;

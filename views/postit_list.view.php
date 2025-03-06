@@ -62,7 +62,7 @@ if (!isset($_SESSION)) {
                                 <small class=\"text-muted\">Publié le : ".$postit['date_post']."</small>
                             </div>
                             <div class=\"options-container\">
-                                <button class=\"btn btn-light btn-sm\" onclick=\"redirectToDelete(".$postit['idpostit'].")\"><i class=\"fas fa-trash-alt\"></i></button>
+                                <button class=\"btn btn-light btn-sm\" onclick=\"confirmDelete(".$postit['idpostit'].")\"><i class=\"fas fa-trash-alt\"></i></button>
                             </div>
                         </div>
                     </div>";
@@ -110,6 +110,11 @@ if (!isset($_SESSION)) {
         }
         function redirectToDelete(id) {
             window.location.href = '?action=delete&id=' + id;
+        }
+        function confirmDelete(id) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce post-it ?")) {
+                window.location.href = '?action=delete&id=' + id;
+            }
         }
     </script>
 </body>

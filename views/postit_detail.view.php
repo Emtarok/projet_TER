@@ -57,7 +57,7 @@ if (!isset($_SESSION)) {
                                 <button class=\"btn btn-light btn-sm\" onclick=\"redirectTo(".$postit['idpostit'].")\"><i class=\"fas fa-ellipsis-h\"></i></button>
                                 <div class=\"options-menu\">
                                     <button onclick=\"redirectTo(".$postit['idpostit'].")\">Modifier</button>
-                                    <button onclick=\"redirectToDelete(".$postit['idpostit'].")\">Supprimer</button>
+                                    <button onclick=\"confirmDelete(".$postit['idpostit'].")\">Supprimer</button>
                                 </div>
                             </div>
                         </div>";
@@ -97,6 +97,11 @@ if (!isset($_SESSION)) {
         }
         function redirectToDelete(id) {
             window.location.href = '?action=delete&id=' + id;
+        }
+        function confirmDelete(id) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer ce post-it ?")) {
+                redirectToDelete(id);
+            }
         }
     </script>
 </body>

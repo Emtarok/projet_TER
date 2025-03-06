@@ -22,20 +22,20 @@ function handle_request() {
                             $_SESSION['user_id'] = $user['idutilisateur'];
                             $_SESSION['email'] = $user['email'];
                             $_SESSION['pseudo'] = $user['pseudo'];
-                            // echo "Connexion réussie";
+                            echo "Connexion réussie";
                             // Envoyer l'utilisateur à la page postit_list
                             header('Location: index.php?action=list');
                             exit();
                         } else {
-                            // echo "Mot de passe incorrect";
+                            echo "Mot de passe incorrect";
                             require_once __DIR__ . '/../views/connexion.view.php';
                         }
                     } else {
-                        // echo "Email incorrect";
+                        echo "Email incorrect";
                         require_once __DIR__ . '/../views/connexion.view.php';
                     }
                 } else {
-                    // echo "Veuillez remplir tous les champs";
+                    echo "Veuillez remplir tous les champs";
                     require_once __DIR__ . '/../views/connexion.view.php';
                 }
             } else {
@@ -47,7 +47,7 @@ function handle_request() {
         case 'inscription':
             // ...code pour gérer l'action inscription...
             if (!isset($_POST['nom'], $_POST['prenom'], $_POST['email'], $_POST['date_naissance'], $_POST['pseudo'], $_POST['password'])) {
-                echo "Veuillez remplir tous les champs";
+                // echo "Veuillez remplir tous les champs";
                 require_once __DIR__ . '/../views/inscription.view.php';
                 exit();
             } else {
