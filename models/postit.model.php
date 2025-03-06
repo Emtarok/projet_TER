@@ -333,6 +333,7 @@ function delete_postit($id) {
 }
 
 // fonction qui recupere les prenoms des utilisateurs avec qui le postit est partagé
+// en fonction de l'id du postit et de l'id de l'utilisateur partage
 function get_shared_users($postit_id) {
     $conn = db_connect();
     if ($conn) {
@@ -390,7 +391,7 @@ function insert_shared_users($id_postit, $id_utilisateur, $sharedUserIds) {
         return "Erreur de connexion à la base de données";
     }
 }
-// fonction qui permet de recuperer l'id de l'utilisateur du créateur du postità partir de l'id de l'un de ses postits
+// fonction qui permet de recuperer l'id de l'utilisateur du créateur du postit a partir de l'id de l'un de ses postits
 function get_user_id_from_postit($id_postit){
     $conn = db_connect();
     if ($conn) {
@@ -419,6 +420,7 @@ function get_user_id_from_postit($id_postit){
 }
 
 // fonction permettant de supprimer un enregistrement de la table des faits en fonction de l'id_postit et l'id_utilisateur_partage (lors de la modification d'un post-it)
+// Cette fonction supprime tous les post-it dans la table des faits avec l'id_utilisateur (prorio) au lieu de supprimer seulement celui spécifier (dû surement à un défaut d'architecture base de donnée)
 function delete_shared_users($id_postit, $sharedUserIds) {
     $conn = db_connect();
     if ($conn) {

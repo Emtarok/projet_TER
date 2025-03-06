@@ -1,4 +1,5 @@
 <?php
+// fichier qui a servi uniquement pour tester des fonctions pour le debug
 require_once '..\models\postit.model.php';
 
 $terme = 'so'; // Terme de recherche pour tester la fonction

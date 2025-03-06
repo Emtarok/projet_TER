@@ -3,6 +3,7 @@ $(document).ready(function () {
     let utilisateursSelectionnes = [];
     let utilisateursSupprimes = [];
 
+    // fonction qui servait uniquement à update un tableau avec le contenu des variables mis en POST pour le debug
     function updateDisplay() {
         document.getElementById('utilisateurs_supprimes_content').innerText = JSON.stringify(utilisateursSupprimes, null, 2);
     }
@@ -54,7 +55,6 @@ $(document).ready(function () {
             $("#prenom_partage").val("");
             $("#suggestions").hide();
         }
-        updateDisplay()
     });
 
     // Suppression de l'utilisateur selectionne
@@ -63,7 +63,6 @@ $(document).ready(function () {
         utilisateursSelectionnes = utilisateursSelectionnes.filter(user => user.idutilisateur !== idutilisateur);
         utilisateursSupprimes.push(idutilisateur);
         $(this).parent().remove();
-        updateDisplay()
     });
 
     // permet de cacher les suggestions lorsqu'on clique en dehors de celle-ci
@@ -75,14 +74,13 @@ $(document).ready(function () {
 
     // fonction permettant de récupérer l'id des utilisateurs selectionnés lors de la création d'un post-it
     function SharedUsers() {
-        const selectedUsers = utilisateursSelectionnes.map(user => user.idutilisateur); // Array to store selected user IDs
+        const selectedUsers = utilisateursSelectionnes.map(user => user.idutilisateur);
         document.getElementById('utilisateurs_partages').value = JSON.stringify(selectedUsers);
     }
 
     // fonction permettant de récupérer l'id des utilisateurs supprimés lors de la modification d'un post-it
     function RemoveSharedUsers() {
         document.getElementById('utilisateurs_supprimes').value = JSON.stringify(utilisateursSupprimes);
-        updateDisplay();
     }
 
     // Ajoutez un écouteur d'événement pour la soumission du formulaire
