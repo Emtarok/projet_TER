@@ -18,6 +18,11 @@
                 <div class="card__face card__face--front">
                     <h2>Connexion</h2>
                     <form action="?action=connexion" method="POST">
+                        <?php if (!empty($error_message)) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                <?= $error_message ?>
+                            </div>
+                        <?php endif; ?>
                         <div class="form-group">
                             <input type="email" class="form-control" name="email" placeholder="Email">
                         </div>

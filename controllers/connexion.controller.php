@@ -5,6 +5,7 @@ require_once __DIR__ . '/../models/inscription.model.php';
 
 function handle_request() {
     $action = isset($_GET['action']) ? $_GET['action'] : 'connexion';
+    $error_message = '';
     switch ($action) {
         case 'connexion':
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -28,21 +29,22 @@ function handle_request() {
                             header('Location: index.php?action=list');
                             exit();
                         } else {
-                            echo "Mot de passe incorrect";
-                            require_once __DIR__ . '/../views/connexion.view.php';
+                            $error_message = "Mot de passe incorrect";
+                            //require_once __DIR__ . '/../views/connexion.view.php';
                         }
                     } else {
-                        echo "Email incorrect";
-                        require_once __DIR__ . '/../views/connexion.view.php';
+                        $error_message = "Email incorrect";
+                        //require_once __DIR__ . '/../views/connexion.view.php';
                     }
                 } else {
-                    echo "Veuillez remplir tous les champs";
-                    require_once __DIR__ . '/../views/connexion.view.php';
+                    $error_message = "Veuillez remplir tous les champs";
+                    //require_once __DIR__ . '/../views/connexion.view.php';
                 }
             } else {
                 // echo "Méthode non autorisée";
-                require_once __DIR__ . '/../views/connexion.view.php';
+                //require_once __DIR__ . '/../views/connexion.view.php';
             }
+            require_once __DIR__ . '/../views/connexion.view.php';
             break;
 
         case 'inscription':
